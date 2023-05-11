@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {
-    home,
-    game
-} = require('../controllers/controllers');
+const controllers = require('../controllers/controllers');
 
-router.route('/').get(home);
-router.route('/game').get(game);
+router.route('/').get(controllers.home);
 
 module.exports = router;
