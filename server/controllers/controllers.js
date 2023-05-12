@@ -1,5 +1,5 @@
 const home = (req, res) => {
-    res.status(200).json({message: "Hello World!"});
+    res.status(200).send('Welcome to the home page.');
 }
 
 module.exports = {

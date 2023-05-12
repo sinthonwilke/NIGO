@@ -14,7 +14,7 @@ const createTag = asyncHandler(async (req, res) => {
     const { name } = req.body;
     if (!name) {
         res.status(400);
-        throw new Error('Please provide all required fields');
+        throw new Error('Please provide all required fields.');
     }
     const tag = await tagSchema.create({
         name

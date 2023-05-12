@@ -4,7 +4,8 @@ const tagSchema = require('../models/tagModel');
 
 
 const getGames = asyncHandler(async (req, res) => {
-
+    const games = await gameSchema.find().populate('tags', 'name');
+    res.status(200).json(games);
 });
 
 const getGame = asyncHandler(async (req, res) => {
@@ -15,18 +16,11 @@ const createGame = asyncHandler(async (req, res) => {
     const { title, tags } = req.body;
     const existingTags = await tagSchema.find({ name: { $in: tags } });
     const existingTagNames = existingTags.map(tag => tag.name);
-
-    if (!title || !tags) {
-        res.status(400).send('Please provide all required fields');
-        return;
-    }
-
     const notFoundTags = tags.filter(tagName => !existingTagNames.includes(tagName));
     if (notFoundTags.length > 0) {
         res.status(400).send(`Tags not found: ${notFoundTags.join(', ')}`);
         return;
     }
-
     const newGame = await gameSchema.create({
         title,
         tags: existingTags.map(tag => tag._id),
