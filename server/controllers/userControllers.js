@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+const tokenSchema = require('../models/tokenModel');
 const user = require('../models/userModel');
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -20,7 +22,6 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         password: hashedPassword,
     });
-    console.log(newUser);
     res.status(201).send('User created');
 });
 
@@ -35,13 +36,17 @@ const loginUser = asyncHandler(async (req, res) => {
     if (user && (await bcrypt.compare(password, loginUser.password))) {
         const accessToken = jwt.sign(
             {
-                id: loginUser._id
+                id: loginUser._id,
             },
             process.env.ACESS_TOKEN_SECRET,
             {
-                expiresIn: '30d'
+                expiresIn: '30D'
             }
         );
+        const token = await tokenSchema.create({
+            token: accessToken,
+            user: loginUser._id,
+        });
         res.status(200).json({ accessToken });
     } else {
         res.status(400);
@@ -49,12 +54,26 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
+const logoutUser = asyncHandler(async (req, res) => {
+    let token;
+    let authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer')) {
+        token = authHeader.split(' ')[1];
+        await tokenSchema.findOneAndDelete({ token });
+    }
+    res.status(200).send('User logged out.');
+});
+
 const currentUser = asyncHandler(async (req, res) => {
-    res.status(200).send('success');
+    res.status(200).json({
+        UserID: req.user,
+        UserToken: req.token
+    });
 });
 
 module.exports = {
     registerUser,
     loginUser,
+    logoutUser,
     currentUser,
 };
