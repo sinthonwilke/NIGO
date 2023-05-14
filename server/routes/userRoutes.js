@@ -10,7 +10,7 @@ const {
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.get('/logout', logoutUser);
+router.get('/logout', validateTokenHandler, logoutUser);
 router.get('/', validateTokenHandler, currentUser);
 
 module.exports = router;
