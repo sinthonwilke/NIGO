@@ -1,10 +1,12 @@
+import Nav from '../components/Nav';
+import GameMenu from '../components/GameMenu';
+
 function Game() {
     return (
-        <div className="content">
-            <div className="game">Today</div>
-            <h1>Game</h1>
-            {/* other content */}
-        </div>
+        <>
+            <Nav />
+            <GameMenu />
+        </>
     );
 }
 

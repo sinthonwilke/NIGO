@@ -1,11 +1,11 @@
 import gStyles from '../styles/global.module.css';
 
-function News() {
+function WishListMenu() {
     return (
         <div className="content">
-            <h1 className={gStyles.head}>News</h1>
+            <h1 className={gStyles.head}>Wish List</h1>
         </div>
     );
 }
 
-export default News;
+export default WishListMenu;

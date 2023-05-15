@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Game from './pages/Game';
-import Collection from './pages/Collection';
+import WishList from './pages/WishList';
 import Register from './pages/Register';
 
 import isAuthenticated from './services/isAuthenticated'
@@ -26,7 +26,7 @@ function App() {
                     <>
                         <Route path="/" element={<Home />} />
                         <Route path="/game" element={<Game />} />
-                        <Route path="/collection" element={<Collection />} />
+                        <Route path="/wishlist" element={<WishList />} />
                         <Route path="*" element={<Navigate to="/" />} />
 
                     </>
