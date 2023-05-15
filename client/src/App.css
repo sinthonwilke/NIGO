@@ -12,3 +12,10 @@ body {
   color: rgb(235, 235, 235);
   font-size: 18px;
 }
+
+@media screen and (min-width: 1980px) {
+  body {
+    width: 1980px;
+    margin: 0 auto;
+  }
+}

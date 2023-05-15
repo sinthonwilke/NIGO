@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import News from '../components/News';
 
-function Home() {
+function HomePage() {
     return (
         <>
             <Nav />
@@ -10,4 +10,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default HomePage;

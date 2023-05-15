@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import WishListMenu from '../components/WishListMenu';
 
-function WishList() {
+function WishListPage() {
     return (
         <>
             <Nav />
@@ -10,4 +10,4 @@ function WishList() {
     );
 }
 
-export default WishList;
+export default WishListPage;

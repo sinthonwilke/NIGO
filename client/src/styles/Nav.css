@@ -121,13 +121,6 @@ a {
 
 /* responsive for navigator bar */
 
-@media screen and (min-width: 1980px) {
-    body {
-        width: 1980px;
-        margin: 0 auto;
-    }
-}
-
 @media screen and (max-width: 768px) {
 
     .nav {

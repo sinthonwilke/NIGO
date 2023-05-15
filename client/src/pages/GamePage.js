@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import GameMenu from '../components/GameMenu';
 
-function Game() {
+function GamePage() {
     return (
         <>
             <Nav />
@@ -10,4 +10,4 @@ function Game() {
     );
 }
 
-export default Game;
+export default GamePage;

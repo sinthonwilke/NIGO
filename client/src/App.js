@@ -1,10 +1,10 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Game from './pages/Game';
-import WishList from './pages/WishList';
-import Register from './pages/Register';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import GamePage from './pages/GamePage';
+import WishListPage from './pages/WishListPage';
+import RegisterPage from './pages/RegisterPage';
 
 import isAuthenticated from './services/isAuthenticated'
 
@@ -18,15 +18,15 @@ function App() {
             <Routes>
                 {isAuth ? (
                     <>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
                         <Route path="*" element={<Navigate to="/login" />} />
                     </>
                 ) : (
                     <>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/game" element={<Game />} />
-                        <Route path="/wishlist" element={<WishList />} />
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/game" element={<GamePage />} />
+                        <Route path="/wishlist" element={<WishListPage />} />
                         <Route path="*" element={<Navigate to="/" />} />
 
                     </>
