@@ -1,49 +1,36 @@
-import { BrowserRouter, Routes, Route, redirect } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Game from './pages/Game';
+import Collection from './pages/Collection';
+import Register from './pages/Register';
+
+import isAuthenticated from './services/isAuthenticated'
 
 import './App.css';
-import Header from './components/Header';
-import Nav from './components/Nav';
-import Content from './components/Content';
-import Login from './pages/Login';
-
-import IsAuth from './services/IsAuth';
 
 function App() {
-
-    // if (IsAuth) return (
-    //     <BrowserRouter>
-    //         <Routes>
-    //             <Route path="/login" element={
-    //                 <>
-    //                     <Login />
-    //                 </>
-    //             }
-    //             />
-    //         </Routes>
-    //     </BrowserRouter>
-    // );
+    const isAuth = isAuthenticated();
 
     return (
         <BrowserRouter>
             <Routes>
-
-                <Route path="/" element={
+                {isAuth ? (
                     <>
-                        <Header />
-                        <Nav />
-                        <Content />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="*" element={<Navigate to="/login" />} />
                     </>
-                }
-                />
-
-                {/* <Route path="/login" element={
+                ) : (
                     <>
-                        <Login />
+                        <Route path="/" element={<Home />} />
+                        <Route path="/game" element={<Game />} />
+                        <Route path="/collection" element={<Collection />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+
                     </>
-                }
-                /> */}
-
-
+                )}
             </Routes>
         </BrowserRouter>
     );

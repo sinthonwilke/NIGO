@@ -1,4 +1,4 @@
-function Content() {
+function News() {
     return (
         <div className="content">
             <div className="today">Today</div>
@@ -7,4 +7,4 @@ function Content() {
     );
 }
 
-export default Content;
+export default News;
