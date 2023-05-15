@@ -1,4 +1,5 @@
 import logo from '../assets/logo/logo.png';
+import '../styles/Nav.css';
 import { useState } from 'react';
 
 function Nav() {
@@ -22,7 +23,7 @@ function Nav() {
 
             <div className="nav-right">
                 <button>Account<i className="fa-solid fa-user"></i></button>
-                <button onClick={toggleMenu}>MENU<i className="fas fa-bars"></i></button>
+                <button onClick={toggleMenu}>Menu<i className="fas fa-bars"></i></button>
             </div>
 
             <div className={`menu ${menuOpen ? "open" : ""}`}>

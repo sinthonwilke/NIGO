@@ -1,0 +1,3 @@
+function IsAuth() {
+    return false;
+}
