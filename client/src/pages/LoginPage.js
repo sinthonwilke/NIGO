@@ -72,7 +72,7 @@ const LoginPage = () => {
                     </a>
                 </div>
                 <div className={styles.forgetPassContainer}>
-                    <a href='' className={styles.forgetPass}>Forget Password?</a>
+                    <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' className={styles.forgetPass}>Forget Password?</a>
                 </div>
             </form>
         </div>
