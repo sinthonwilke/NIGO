@@ -37,7 +37,7 @@ function Nav() {
                     <ul className="menu-list">
                         <li><a href="/">Home</a></li>
                         <li><a href="/game">Games</a></li>
-                        <li><a href="/collection">Wish List</a></li>
+                        <li><a href="/wishlist">Wish List</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
