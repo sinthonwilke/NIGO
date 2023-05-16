@@ -87,6 +87,13 @@
     cursor: pointer;
 }
 
+.alreadyUser {
+    display: flex;
+    padding-right: 6px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
 .forgetPassContainer {
     display: flex;
     padding-right: 6px;

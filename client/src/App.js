@@ -1,12 +1,14 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate, } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import GamePage from './pages/GamePage';
 import WishListPage from './pages/WishListPage';
+import Favorite from './pages/FavoritePage';
 import RegisterPage from './pages/RegisterPage';
 
 import isAuthenticated from './services/isAuthenticated'
+import logout from './services/logout'
 
 import './App.css';
 
@@ -18,17 +20,18 @@ function App() {
             <Routes>
                 {isAuth ? (
                     <>
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="*" element={<Navigate to="/login" />} />
-                    </>
-                ) : (
-                    <>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/game" element={<GamePage />} />
                         <Route path="/wishlist" element={<WishListPage />} />
+                        <Route path="/favorite" element={<Favorite />} />
+                        <Route path="/logout" Component={logout} />
                         <Route path="*" element={<Navigate to="/" />} />
-
+                    </>
+                ) : (
+                    <>
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
+                        <Route path="*" element={<Navigate to="/login" />} />
                     </>
                 )}
             </Routes>

@@ -24,7 +24,7 @@ const LoginPage = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const loginData = {
@@ -32,8 +32,15 @@ const LoginPage = () => {
             password
         };
 
-        const res = axios.post('http://localhost:3000/api/user/login', loginData);
-        console.log(res);
+        try {
+            const res = await axios.post('http://localhost:3000/api/user/login', loginData);
+            const token = res.data.accessToken;
+            localStorage.setItem('token', token);
+            window.location.href = '/';
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
     return (

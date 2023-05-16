@@ -22,6 +22,7 @@ function Nav() {
                     <a href="/"><img src={logo} alt="logo" /></a>
                     <a href="/game">Games</a>
                     <a href="/wishlist">Wish List</a>
+                    <a href="/favorite">Favorite</a>
                 </div>
 
                 <div className="nav-mid">
@@ -38,6 +39,7 @@ function Nav() {
                         <li><a href="/">Home</a></li>
                         <li><a href="/game">Games</a></li>
                         <li><a href="/wishlist">Wish List</a></li>
+                        <li><a href="/favorite">Favorite</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>

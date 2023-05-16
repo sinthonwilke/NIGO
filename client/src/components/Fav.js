@@ -1,11 +1,11 @@
 import gStyles from '../styles/global.module.css';
 
-function News() {
+function Fav() {
     return (
         <div className="content">
-            <h1 className={gStyles.head}>Latest Added</h1>
+            <h1 className={gStyles.head}>Favorite</h1>
         </div>
     );
 }
 
-export default News;
+export default Fav;

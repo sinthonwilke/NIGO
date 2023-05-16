@@ -9,6 +9,7 @@ const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleUsernameChange = (event) => {
@@ -23,6 +24,10 @@ const LoginPage = () => {
         setPassword(event.target.value);
     };
 
+    const handleConfirmPasswordChange = (event) => {
+        setConfirmPassword(event.target.value);
+    };
+
     const handleTogglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -30,9 +35,17 @@ const LoginPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        setUsername('');
-        setEmail('');
-        setPassword('');
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        const registerData = {
+            username,
+            email,
+            password
+        };
+
     };
 
     return (
@@ -41,6 +54,7 @@ const LoginPage = () => {
                 <img src={logo} alt="logo" />
             </div>
             <h2>Register</h2>
+            <h4>Test</h4>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <input
@@ -54,7 +68,7 @@ const LoginPage = () => {
                 </div>
                 <div className={styles.formContainer}>
                     <input
-                        type="text"
+                        type="email"
                         id="email"
                         placeholder="Email"
                         value={email}
@@ -82,15 +96,17 @@ const LoginPage = () => {
                     <input
                         type='password'
                         id="confirmPassword"
+                        value={confirmPassword}
+                        onChange={handleConfirmPasswordChange}
                         placeholder="Confirm Password"
                         required
                     />
                 </div>
                 <div className={styles.button}>
                     <button type="submit">Register</button>
-                    <a href="/login" className={gStyles.black}>
-                        <button type="button">Back</button>
-                    </a>
+                </div>
+                <div className={styles.alreadyUser}>
+                    <a href='/login' className={styles.forgetPass}>Already a user? Login.</a>
                 </div>
             </form>
         </div>
