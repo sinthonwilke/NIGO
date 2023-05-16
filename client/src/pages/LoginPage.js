@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo/logo.png';
 
+import axios from 'axios';
+
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,24 +27,27 @@ const LoginPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Perform login logic here
+        const loginData = {
+            email,
+            password
+        };
 
-        setEmail('');
-        setPassword('');
+        const res = axios.post('http://localhost:3000/api/user/login', loginData);
+        console.log(res);
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.topbar}>
-                <img src={logo} alt="logo" />
+                <img src={logo} alt='logo' />
             </div>
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <input
-                        type="text"
-                        id="email"
-                        placeholder="Email"
+                        type='text'
+                        id='email'
+                        placeholder='Email'
                         value={email}
                         onChange={handleEmailChange}
                         required
@@ -52,8 +57,8 @@ const LoginPage = () => {
                 <div className={styles.formContainer}>
                     <input
                         type={showPassword ? 'text' : 'password'}
-                        id="password"
-                        placeholder="Password"
+                        id='password'
+                        placeholder='Password'
                         value={password}
                         onChange={handlePasswordChange}
                         required
@@ -66,9 +71,9 @@ const LoginPage = () => {
                     />
                 </div>
                 <div className={styles.button}>
-                    <button type="submit">Login</button>
-                    <a href="/register" className={gStyles.black}>
-                        <button type="button">Register</button>
+                    <button type='submit'>Login</button>
+                    <a href='/register' className={gStyles.black}>
+                        <button type='button'>Register</button>
                     </a>
                 </div>
                 <div className={styles.forgetPassContainer}>

@@ -11,8 +11,10 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
+
 app.use('/', require('./routes/routes'));
 app.use('/api/user', require('./routes/userRoutes.js'));
 app.use('/api/game', require('./routes/gameRoutes.js'));
 app.use('/api/tag', require('./routes/tagRoutes.js'));
+
 app.use(errorhandler);
