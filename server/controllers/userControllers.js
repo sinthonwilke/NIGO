@@ -33,7 +33,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     const loginUser = await user.findOne({ email });
-    if (user && (await bcrypt.compare(password, loginUser.password))) {
+    if (loginUser && (await bcrypt.compare(password, loginUser.password))) {
         const accessToken = jwt.sign(
             {
                 id: loginUser._id,

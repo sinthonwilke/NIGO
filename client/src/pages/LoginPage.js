@@ -8,9 +8,14 @@ import logo from '../assets/logo/logo.png';
 import axios from 'axios';
 
 const LoginPage = () => {
+    const [message, setMessage] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
+    const handleMessageText = (msg) => {
+        setMessage(msg);
+    };
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -26,7 +31,6 @@ const LoginPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const loginData = {
             email,
             password
@@ -34,13 +38,11 @@ const LoginPage = () => {
 
         try {
             const res = await axios.post('http://localhost:3000/api/user/login', loginData);
-            const token = res.data.accessToken;
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', res.data.accessToken);
             window.location.href = '/';
         } catch (error) {
-            console.log(error);
+            handleMessageText(error.response.data.message);
         }
-
     };
 
     return (
@@ -49,10 +51,11 @@ const LoginPage = () => {
                 <img src={logo} alt='logo' />
             </div>
             <h2>Login</h2>
+            <h5 className={styles.message}>{message}</h5>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <input
-                        type='text'
+                        type='email'
                         id='email'
                         placeholder='Email'
                         value={email}

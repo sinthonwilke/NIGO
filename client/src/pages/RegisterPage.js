@@ -6,11 +6,16 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo/logo.png';
 
 const LoginPage = () => {
+    const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
+    const handleMessageText = (msg) => {
+        setMessage(msg);
+    };
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -36,7 +41,7 @@ const LoginPage = () => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
-            alert('Passwords do not match');
+            handleMessageText('Passwords do not match');
             return;
         }
 
@@ -54,7 +59,7 @@ const LoginPage = () => {
                 <img src={logo} alt="logo" />
             </div>
             <h2>Register</h2>
-            <h4>Test</h4>
+            <h5 className={styles.message}>{message}</h5>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <input
