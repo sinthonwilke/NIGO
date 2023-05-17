@@ -1,6 +1,26 @@
+@keyframes bounceOnce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.effect {
+    animation: bounceOnce 0.5s;
+}
+
+
 .message {
     color: red;
     padding: 0 18px;
+    text-align: center;
 }
 
 .container {

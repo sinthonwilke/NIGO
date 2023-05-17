@@ -13,11 +13,15 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-
+    const [showMessageEffect, setShowMessageEffect] = useState(false);
 
     const handleMessageText = (msg) => {
-
         setMessage(msg);
+        setShowMessageEffect(false);
+        setTimeout(() => {
+            setShowMessageEffect(true);
+        }
+            , 1);
     };
 
     const handleEmailChange = (event) => {
@@ -54,7 +58,7 @@ const LoginPage = () => {
                 <img src={logo} alt='logo' />
             </div>
             <h2>Login</h2>
-            <h5 className={styles.message}>{message}</h5>
+            <h5 className={`${styles.message} ${showMessageEffect ? styles.effect : ''}`}>{message}</h5>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <input
