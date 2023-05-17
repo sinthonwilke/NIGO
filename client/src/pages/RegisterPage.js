@@ -1,9 +1,12 @@
-import { useState } from 'react';
 import styles from '../styles/LoginPage.module.css';
 import gStyles from '../styles/global.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo/logo.png';
+
+import { useState } from 'react';
+import axios from 'axios';
+import { registerUrl, loginUrl } from '../services/apiList';
 
 const LoginPage = () => {
     const [message, setMessage] = useState('');
@@ -37,7 +40,7 @@ const LoginPage = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
@@ -51,6 +54,19 @@ const LoginPage = () => {
             password
         };
 
+        try {
+            const registerRes = await axios.post(registerUrl, registerData);
+            if (registerRes.status === 201) {
+                const loginRes = await axios.post(loginUrl, { email, password });
+                localStorage.setItem('token', loginRes.data.accessToken);
+                window.location.href = '/';
+            }
+            else {
+                handleMessageText(registerRes.data.message);
+            }
+        } catch (error) {
+            handleMessageText(error.response.data.message);
+        }
     };
 
     return (

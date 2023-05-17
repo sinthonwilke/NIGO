@@ -11,18 +11,13 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error('Please provide all required fields.');
     };
-    const userExist = await user.findOne({ username });
-    if (userExist) {
-        res.status(400);
-        throw new Error('User already exists.');
-    };
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await user.create({
         username,
         email,
         password: hashedPassword,
     });
-    res.status(201).send('User created');
+    res.status(201).send('created');
 });
 
 const loginUser = asyncHandler(async (req, res) => {
