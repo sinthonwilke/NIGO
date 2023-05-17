@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import styles from '../styles/LoginPage.module.css';
 import gStyles from '../styles/global.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo/logo.png';
 
+import { useState } from 'react';
 import axios from 'axios';
+import { loginUrl } from '../services/apiList';
 
 const LoginPage = () => {
     const [message, setMessage] = useState('');
@@ -41,7 +42,7 @@ const LoginPage = () => {
         };
 
         try {
-            const res = await axios.post('http://localhost:3000/api/user/login', loginData);
+            const res = await axios.post(loginUrl, loginData);
             localStorage.setItem('token', res.data.accessToken);
             window.location.href = '/';
         } catch (error) {
