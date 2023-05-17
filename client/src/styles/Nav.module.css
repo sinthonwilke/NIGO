@@ -14,33 +14,33 @@ a {
     ;
 }
 
-.nav .nav-left {
+.nav .navLeft {
     display: flex;
     align-items: center;
     height: inherit;
     gap: 20px;
 }
 
-.nav .nav-left a {
+.nav .navLeft a {
     display: flex;
     align-items: center;
     height: inherit;
 }
 
-.nav .nav-left a img {
+.nav .navLeft a img {
     height: 55%;
 }
 
-.nav .nav-mid {
+.nav .navMid {
     flex-grow: 1;
     margin: 0 20px;
 }
 
-.nav .nav-mid form {
+.nav .navMid form {
     width: inherit;
 }
 
-.nav .nav-mid input {
+.nav .navMid input {
     padding: 8px 40px 8px 16px;
     border: none;
     border-radius: 50px;
@@ -50,12 +50,12 @@ a {
     width: calc(100% - 60px);
 }
 
-.nav .nav-right {
+.nav .navRight {
     display: flex;
     gap: 5px;
 }
 
-.nav .nav-right button {
+.nav .navRight button {
     display: flex;
     align-items: center;
     padding: 12px 16px;
@@ -66,20 +66,15 @@ a {
     font-size: 16px;
 }
 
-.nav .nav-right button:hover {
+.nav .navRight button:hover {
     cursor: pointer;
 }
 
-.nav .nav-right button i {
-    font-size: 18px;
-    margin-left: 8px;
-}
-
-.nav-right button:nth-of-type(2) i {
+.nav .navRight button i {
     font-size: 20px;
+    margin-left: 8px;
     padding-top: 2px;
 }
-
 
 .menu {
     display: block;
@@ -93,22 +88,22 @@ a {
     transition: right 0.3s ease-in-out;
 }
 
-.menu-list {
+.menuList {
     display: block;
     list-style: none;
     padding: 0;
     margin: 16px 0 16px 8px;
 }
 
-.menu-list li {
+.menuList li {
     padding: 8px;
 }
 
-.menu-list li:nth-of-type(5) {
+.menuList li:nth-of-type(5) {
     margin-top: 16px;
 }
 
-.menu-list li a {
+.menuList li a {
     display: block;
     color: #fff;
     text-decoration: none;
@@ -127,19 +122,15 @@ a {
         padding: 0 6px;
     }
 
-    .nav .nav-mid {
+    .nav .navMid {
         margin: 0 6px;
     }
 
-    .nav .nav-left a {
+    .nav .navLeft a {
         display: none;
     }
 
-    .nav .nav-right button:first-child {
-        display: none;
-    }
-
-    .nav .nav-right button:last-child {
+    .nav .navRight button {
         font-size: 0;
         padding: 6px 9px 6px 0;
         background-color: transparent;

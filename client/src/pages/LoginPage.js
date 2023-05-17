@@ -12,9 +12,13 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [bounceEffect, setBounceEffect] = useState('');
+
 
     const handleMessageText = (msg) => {
         setMessage(msg);
+        setBounceEffect('');
+        setTimeout(() => setBounceEffect(styles.bounce), 0);
     };
 
     const handleEmailChange = (event) => {
@@ -51,7 +55,7 @@ const LoginPage = () => {
                 <img src={logo} alt='logo' />
             </div>
             <h2>Login</h2>
-            <h5 className={styles.message}>{message}</h5>
+            <h5 className={`${styles.message} ${bounceEffect} ${gStyles.red}`}>{message}</h5>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formContainer}>
                     <input

@@ -1,21 +1,19 @@
-.message {
-    color: red;
-    animation-name: bounce;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
-}
-
 @keyframes bounce {
-
-    0%,
-    100% {
+    0% {
         transform: translateY(0);
     }
 
     50% {
         transform: translateY(-10px);
     }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounce {
+    animation: bounce 0.5s ease-in-out;
 }
 
 .container {
