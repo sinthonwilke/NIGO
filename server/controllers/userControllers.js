@@ -50,13 +50,14 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
-    let token;
     let authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer')) {
-        token = authHeader.split(' ')[1];
+        let token = authHeader.split(' ')[1];
         await tokenSchema.findOneAndDelete({ token });
+        res.status(200).send('User logged out.');
+    } else {
+        res.status(401).send('Invalid token.');
     }
-    res.status(200).send('User logged out.');
 });
 
 const currentUser = asyncHandler(async (req, res) => {
