@@ -27,6 +27,10 @@ const gameSchema = new mongoose.Schema({
     },
     imgUrl: {
         type: String,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
