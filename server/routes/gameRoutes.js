@@ -8,7 +8,12 @@ const {
     deleteGame
 } = require('../controllers/gameControllers');
 
-router.route('/').get(getGames).post(createGame);
-router.route('/:reqId').get(getGame).put(updateGame).delete(deleteGame);
+
+router.get('/', getGames);
+router.post('/', createGame);
+router.get('/:reqId', getGame);
+router.put('/:reqId', updateGame);
+router.delete('/:reqId', deleteGame);
+
 
 module.exports = router;
