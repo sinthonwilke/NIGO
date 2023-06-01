@@ -24,6 +24,9 @@ const gameSchema = new mongoose.Schema({
     tags: {
         type: [String],
         required: true
+    },
+    imgUrl: {
+        type: String,
     }
 });
 
