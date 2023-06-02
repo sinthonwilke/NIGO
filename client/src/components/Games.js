@@ -2,8 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Games.module.css';
 import gameImg from '../assets/example/gameImg.jpg';
 import { AiOutlineHeart, AiFillCloseSquare } from 'react-icons/ai';
+import axios from 'axios';
 
 function Games({ gameData }) {
+
+    const [imageSrc, setImageSrc] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' })
+            .then(response => {
+                const imageURL = URL.createObjectURL(response.data);
+                setImageSrc(imageURL);
+            });
+    }, []);
+
+
     const [showDetail, setShowDetail] = useState(false);
     const detailRef = useRef(null);
 
@@ -29,7 +42,9 @@ function Games({ gameData }) {
         <div>
             <div className={styles.itemCard}>
                 <button className={styles.btnContent} onClick={handleButtonClick}>
-                    <img src="" />
+                    <div>
+                        {imageSrc && <img src={imageSrc} />}
+                    </div>
                 </button>
                 <h3>{gameData.title}</h3>
                 <div className={styles.buttonContainer}>
@@ -40,9 +55,10 @@ function Games({ gameData }) {
             {showDetail && (
                 <div className={styles.itemCardDetail}>
                     <div className={styles.detail} ref={detailRef}>
-                        <img src="" />
+                        <div>
+                            {imageSrc && <img src={imageSrc} />}
+                        </div>
                         <button className={styles.exitBtn} onClick={handleButtonClick}><AiFillCloseSquare /></button>
-
                         <h3>{gameData.title}</h3>
                         <p>{gameData.description}</p>
                         <p className={styles.tags}>Release Date: {gameData.releaseDate}</p>
