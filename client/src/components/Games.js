@@ -61,7 +61,7 @@ function Games({ gameData }) {
                 await axios.post(favUrl + gameData._id, {}, authConfig);
             }
         } catch (error) {
-            console.error('Failed to update like status:', error);
+            console.log(error);
         }
     };
 

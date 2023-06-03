@@ -8,7 +8,10 @@ const getFavs = asyncHandler(async (req, res) => {
 });
 
 const isFav = asyncHandler(async (req, res) => {
-    const fav = await favSchema.findOne({ game_id: req.params.reqId });
+    const fav = await favSchema.findOne({
+        user_id: req.user,
+        game_id: req.params.reqId
+    });
     if (fav) {
         res.status(200).json(true);
     } else {
