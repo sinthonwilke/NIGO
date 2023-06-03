@@ -23,8 +23,6 @@ function GamePage() {
             });
     }, []);
 
-    console.log(gameList);
-
     return (
         <>
             <h1 className={gStyles.head}>Games</h1>

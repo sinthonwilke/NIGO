@@ -8,7 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import isAuthenticated from './services/isAuthenticated';
 import logout from './services/logout';
 import './App.css';
-import Layout from './layout/Layout';
+import Layout from './layout/layout';
 
 function App() {
     const isAuth = isAuthenticated();

@@ -7,6 +7,7 @@ const logout = (navigate) => {
     })
         .then(response => {
             localStorage.removeItem('token');
+            localStorage.removeItem('searchValue');
             window.location.href = '/login';
         })
         .catch(error => {
