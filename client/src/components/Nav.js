@@ -32,53 +32,57 @@ function Nav() {
     }, [location]);
 
     return (
-        <nav className={styles.nav}>
-            <div className={styles.navLeft}>
-                <Link to="/">
-                    <img src={logo} alt="logo" />
-                </Link>
-                <Link to="/game">Games</Link>
-                <Link to="/wishlist">Wish List</Link>
-                <Link to="/favorite">Favorite</Link>
-            </div>
+        <>
+            <div className={styles.nav}>
+                <div className={styles.navLeft}>
+                    <Link to="/">
+                        <img src={logo} alt="logo" />
+                    </Link>
+                    <Link to="/game">Games</Link>
+                    <Link to="/wishlist">Wish List</Link>
+                    <Link to="/favorite">Favorite</Link>
+                </div>
 
-            <div className={styles.navMid}>
-                <form>
-                    <input
-                        type="text"
-                        placeholder="Search games..."
-                        value={searchValue}
-                        onChange={handleInputChange}
-                    />
-                </form>
-            </div>
+                <div className={styles.navMid}>
+                    <form>
+                        <input
+                            type="text"
+                            placeholder="Search games..."
+                            value={searchValue}
+                            onChange={handleInputChange}
+                        />
+                    </form>
+                </div>
 
-            <div className={styles.navRight}>
-                <button onClick={toggleMenu}>
-                    Menu<BiMenu className={styles.ico} />
-                </button>
-            </div>
+                <div className={styles.navRight}>
+                    <button onClick={toggleMenu}>
+                        Menu<BiMenu className={styles.ico} />
+                    </button>
+                </div>
 
-            <div className={`${styles.menu} ${menuOpen ? styles.open : ''}`}>
-                <ul className={styles.menuList}>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/game">Games</Link>
-                    </li>
-                    <li>
-                        <Link to="/wishlist">Wish List</Link>
-                    </li>
-                    <li>
-                        <Link to="/favorite">Favorite</Link>
-                    </li>
-                    <li>
-                        <Link to="/logout">Logout</Link>
-                    </li>
-                </ul>
+                <div className={`${styles.menu} ${menuOpen ? styles.open : ''}`}>
+                    <ul className={styles.menuList}>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/game">Games</Link>
+                        </li>
+                        <li>
+                            <Link to="/wishlist">Wish List</Link>
+                        </li>
+                        <li>
+                            <Link to="/favorite">Favorite</Link>
+                        </li>
+                        <li>
+                            <Link to="/logout">Logout</Link>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-        </nav>
+            <div style={{ marginBottom: '110px' }}></div>
+        </>
     );
 }
 
