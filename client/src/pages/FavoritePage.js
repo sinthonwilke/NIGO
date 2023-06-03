@@ -4,7 +4,6 @@ import Fav from '../components/Fav';
 function FavoritePage() {
     return (
         <>
-            <Nav />
             <Fav />
         </>
     );

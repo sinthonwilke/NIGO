@@ -27,7 +27,6 @@ function GamePage() {
 
     return (
         <>
-            <Nav />
             <h1 className={gStyles.head}>Games</h1>
             <div className={styles.gameContainer}>
                 {gameList.map(gameData => (

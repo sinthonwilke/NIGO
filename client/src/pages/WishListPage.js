@@ -4,7 +4,6 @@ import WishListMenu from '../components/WishListMenu';
 function WishListPage() {
     return (
         <>
-            <Nav />
             <WishListMenu />
         </>
     );
