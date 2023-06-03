@@ -55,18 +55,21 @@ function Games({ gameData }) {
             {showDetail && (
                 <div className={styles.itemCardDetail}>
                     <div className={styles.detail} ref={detailRef}>
-                        <div>
+                        <div className={styles.leftDetail}>
                             {imageSrc && <img src={imageSrc} />}
+                            <button className={styles.exitBtn} onClick={handleButtonClick}><AiFillCloseSquare /></button>
                         </div>
-                        <button className={styles.exitBtn} onClick={handleButtonClick}><AiFillCloseSquare /></button>
-                        <h3>{gameData.title}</h3>
-                        <p>{gameData.description}</p>
-                        <p className={styles.tags}>Release Date: {gameData.releaseDate}</p>
-                        <p className={styles.tags}>Platform: {gameData.platform}</p>
-                        <div className={styles.lastLine}>
-                            <p className={styles.tags}>{gameData.tags.map(tag => `#${tag}`).join(' ')}</p>
-                            <a href={gameData.storeLink} target="_blank">Store Link</a>
+                        <div className={styles.rightDetail}>
+                            <h3>{gameData.title}</h3>
+                            <p>{gameData.description}</p>
+                            <p className={styles.tags}>Release Date: {gameData.releaseDate}</p>
+                            <p className={styles.tags}>Platform: {gameData.platform}</p>
+                            <div className={styles.lastLine}>
+                                <p className={styles.tags}>{gameData.tags.map(tag => `#${tag}`).join(' ')}</p>
+                                <a href={gameData.storeLink} target="_blank">Store Link</a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             )}

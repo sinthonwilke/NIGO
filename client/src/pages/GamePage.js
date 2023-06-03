@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 function GamePage() {
     const gameData = {
         title: 'Game Title',
-        description: 'Game Description',
+        description: 'Game Descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
         releaseDate: '2023-06-03',
         platform: 'PC',
         tags: ['Tag1', 'Tag2', 'Tag3'],
@@ -15,25 +15,11 @@ function GamePage() {
         storeLink: 'https://www.google.com',
     };
 
-    // const [imageSrc, setImageSrc] = useState('');
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' })
-    //         .then(response => {
-    //             const imageURL = URL.createObjectURL(response.data);
-    //             setImageSrc(imageURL);
-    //         });
-    // }, []);
-
-
     return (
         <>
             <Nav />
             <h1 className={gStyles.head}>Games</h1>
             <Games gameData={gameData} />
-            {/* <div>
-                {imageSrc && <img src={imageSrc}/>}
-            </div> */}
         </>
     );
 }

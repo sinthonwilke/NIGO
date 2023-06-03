@@ -77,26 +77,39 @@
 .detail {
     position: relative;
     width: 70%;
-    height: 90%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: auto;
     background-color: rgb(30, 30, 30);
     padding: 16px;
     border-radius: 8px;
     text-align: left;
     box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.75);
+    display: flex;
     overflow: auto;
 }
 
-@media (min-width: 768px) {
-    .detail {
-        width: 600px;
-    }
+.detail .leftDetail {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.detail .rightDetail {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: 16px;
+    overflow-x: auto;
+}
+
+.detail .rightDetail p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .detail img {
     width: 100%;
-    height: auto;
+    height: 800px;
     border-radius: 5px;
-    margin-bottom: 10px;
 }
 
 .detail h3 {
@@ -115,9 +128,9 @@
 }
 
 .exitBtn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
     background-color: transparent;
     border: none;
     color: rgb(255, 53, 53);
@@ -139,7 +152,10 @@
     text-decoration: underline;
 }
 
-/* For WebKit browsers (e.g., Chrome, Safari) */
+.lastLine a:hover {
+    color: rgba(255, 255, 255, 0.75);
+}
+
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -155,4 +171,23 @@
 
 ::-webkit-scrollbar-track {
     background-color: transparent;
+}
+
+@media (min-width: 768px) {
+    .detail {
+        width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail {
+        display: block;
+        overflow-y: auto;
+        max-height: 80vh;
+    }
+
+    .detail img {
+        height: auto;
+        max-width: 100%;
+    }
 }
