@@ -9,42 +9,43 @@ import authConfig from '../services/authConfig';
 function GamePage() {
     const [gameList, setGameList] = useState([]);
     const [favList, setFavList] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(gameListUrl)
-            .then(response => {
-                const updatedGameList = response.data.map((gameData, index) => ({
-                    ...gameData,
+        const fetchData = async () => {
+            try {
+                const gameListResponse = await axios.get(gameListUrl);
+                const updatedGameList = gameListResponse.data.map((gameList, index) => ({
+                    ...gameList,
                     id: index + 1
                 }));
                 setGameList(updatedGameList);
-            })
-            .catch(error => {
-                console.error('Error fetching game list:', error);
-            });
 
-        // axios.get(favUrl, authConfig)
-        //     .then(response => {
-        //         const updatedGameList = response.data.map((gameData, index) => ({
-        //             ...gameData,
-        //             id: index + 1
-        //         }));
-        //         setGameList(updatedGameList);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error fetching game list:', error);
-        //     });
+                const favListResponse = await axios.get(favUrl, authConfig);
+                const updatedFavList = favListResponse.data.map((favList) => ({
+                    ...favList
+                }));
+                setFavList(updatedFavList);
+
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
     }, []);
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <>
             <h1 className={gStyles.head}>Games</h1>
             <div className={styles.gameContainer}>
-                {gameList.map(gameData => (
-                    <div className={styles.item} key={gameData.id}>
-                        <Games gameData={gameData} />
+                {gameList.map(gameList => (
+                    <div className={styles.item} key={gameList.id}>
+                        <Games gameList={gameList} favList={favList} />
                     </div>
                 ))}
             </div>

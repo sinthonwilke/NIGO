@@ -9,4 +9,6 @@ export const registerUrl = url + 'user/register/';
 export const gameListUrl = url + 'game/';
 
 // Favorites
+export const favGamesUrl = url + 'fav/games/';
 export const favUrl = url + 'fav/';
+

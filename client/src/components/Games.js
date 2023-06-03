@@ -5,26 +5,21 @@ import axios from 'axios';
 import { favUrl } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
-function Games({ gameData, fromFavPage = false }) {
+function Games({ gameList, fromFavPage = false, favList = [] }) {
     const [imageSrc, setImageSrc] = useState('');
     const [showDetail, setShowDetail] = useState(false);
     const [like, setLike] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const detailRef = useRef(null);
-
     useEffect(() => {
-        const fetchLikeStatus = async () => {
-            try {
-                const response = await axios.get(favUrl + gameData._id, authConfig);
-                setLike(response.data);
-            } catch (error) {
-                console.error('Failed to fetch like status:', error);
-            }
+        const fetchLikeStatus = () => {
+            const isLiked = favList.some((favItem) => favItem.game_id === gameList._id);
+            setLike(isLiked);
         };
 
         const loadImage = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' });
+                const response = await axios.get('http://localhost:3000/' + gameList.imgUrl, { responseType: 'blob' });
                 const imageURL = URL.createObjectURL(response.data);
                 setImageSrc(imageURL);
                 setIsLoading(false);
@@ -41,8 +36,6 @@ function Games({ gameData, fromFavPage = false }) {
 
         if (!fromFavPage) {
             fetchLikeStatus();
-
-
         } else {
             setLike(true);
         }
@@ -62,16 +55,16 @@ function Games({ gameData, fromFavPage = false }) {
         setLike(prevLike => !prevLike);
         try {
             if (like) {
-                await axios.delete(favUrl + gameData._id, authConfig);
+                await axios.delete(favUrl + gameList._id, authConfig);
             } else {
-                await axios.post(favUrl + gameData._id, {}, authConfig);
+                await axios.post(favUrl + gameList._id, {}, authConfig);
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const releaseDate = new Date(gameData.releaseDate);
+    const releaseDate = new Date(gameList.releaseDate);
     const formattedDate = releaseDate.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -87,7 +80,7 @@ function Games({ gameData, fromFavPage = false }) {
                     <button className={styles.btnContent} onClick={handleButtonClick}>
                         <div>{imageSrc && <img src={imageSrc} />}</div>
                     </button>
-                    <h3>{gameData.title}</h3>
+                    <h3>{gameList.title}</h3>
                     <div className={styles.buttonContainer}>
                         <button className={styles.A2Cbtn}>Add To Collection</button>
                         <button className={styles.likeBtn} onClick={handleLikeClick}>
@@ -110,15 +103,15 @@ function Games({ gameData, fromFavPage = false }) {
                             </button>
                         </div>
                         <div className={styles.rightDetail}>
-                            <h3>{gameData.title}</h3>
-                            <p>{gameData.description}</p>
+                            <h3>{gameList.title}</h3>
+                            <p>{gameList.description}</p>
                             <p className={styles.tags}>Release Date: {formattedDate}</p>
-                            <p className={styles.tags}>Platform: {gameData.platform}</p>
+                            <p className={styles.tags}>Platform: {gameList.platform}</p>
                             <div className={styles.lastLine}>
                                 <p className={styles.tags}>
-                                    {gameData.tags.map(tag => `#${tag}`).join(' ')}
+                                    {gameList.tags.map(tag => `#${tag}`).join(' ')}
                                 </p>
-                                <a href={gameData.link} target="_blank" rel="noopener noreferrer">
+                                <a href={gameList.link} target="_blank" rel="noopener noreferrer">
                                     Store Link
                                 </a>
                             </div>
