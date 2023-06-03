@@ -1,4 +1,3 @@
-import Nav from '../components/Nav';
 import Games from '../components/Games';
 import gStyles from '../styles/global.module.css';
 import React, { useEffect, useState } from 'react';
