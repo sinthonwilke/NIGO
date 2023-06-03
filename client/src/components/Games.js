@@ -38,6 +38,14 @@ function Games({ gameData }) {
         setShowDetail(!showDetail);
     };
 
+    const releaseDate = new Date(gameData.releaseDate);
+    const formattedDate = releaseDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+
+
     return (
         <div>
             <div className={styles.itemCard}>
@@ -62,11 +70,11 @@ function Games({ gameData }) {
                         <div className={styles.rightDetail}>
                             <h3>{gameData.title}</h3>
                             <p>{gameData.description}</p>
-                            <p className={styles.tags}>Release Date: {gameData.releaseDate}</p>
+                            <p className={styles.tags}>Release Date: {formattedDate}</p>
                             <p className={styles.tags}>Platform: {gameData.platform}</p>
                             <div className={styles.lastLine}>
                                 <p className={styles.tags}>{gameData.tags.map(tag => `#${tag}`).join(' ')}</p>
-                                <a href={gameData.storeLink} target="_blank">Store Link</a>
+                                <a href={gameData.link} target="_blank">Store Link</a>
                             </div>
                         </div>
 
