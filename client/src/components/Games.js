@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Games.module.css';
 import { AiOutlineHeart, AiFillCloseSquare, AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
-import { favUrl } from '../services/apiList'
+import { favUrl } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
-function Games({ gameData }) {
+function Games({ gameData, fromFavPage = false }) {
     const [imageSrc, setImageSrc] = useState('');
     const [showDetail, setShowDetail] = useState(false);
-    const detailRef = useRef(null);
     const [like, setLike] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const detailRef = useRef(null);
 
     useEffect(() => {
         const fetchLikeStatus = async () => {
@@ -21,26 +22,31 @@ function Games({ gameData }) {
             }
         };
 
-        fetchLikeStatus();
-    }, []);
-
-
-    useEffect(() => {
-        axios
-            .get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' })
-            .then(response => {
+        const loadImage = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' });
                 const imageURL = URL.createObjectURL(response.data);
                 setImageSrc(imageURL);
-            });
-    }, []);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Failed to load image:', error);
+            }
+        };
 
-    useEffect(() => {
         const handleClickOutside = event => {
             if (detailRef.current && !detailRef.current.contains(event.target)) {
                 setShowDetail(false);
             }
         };
 
+        if (!fromFavPage) {
+            fetchLikeStatus();
+
+
+        } else {
+            setLike(true);
+        }
+        loadImage();
         document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
@@ -74,18 +80,26 @@ function Games({ gameData }) {
 
     return (
         <div>
-            <div className={styles.itemCard}>
-                <button className={styles.btnContent} onClick={handleButtonClick}>
-                    <div>{imageSrc && <img src={imageSrc} />}</div>
-                </button>
-                <h3>{gameData.title}</h3>
-                <div className={styles.buttonContainer}>
-                    <button className={styles.A2Cbtn}>Add To Collection</button>
-                    <button className={styles.likeBtn} onClick={handleLikeClick}>
-                        {like ? <AiFillHeart style={{ fontSize: '26px' }} /> : <AiOutlineHeart style={{ fontSize: '26px' }} />}
+            {isLoading ? (
+                <div className={styles.loading}><p>Loading...</p></div>
+            ) : (
+                <div className={styles.itemCard}>
+                    <button className={styles.btnContent} onClick={handleButtonClick}>
+                        <div>{imageSrc && <img src={imageSrc} />}</div>
                     </button>
+                    <h3>{gameData.title}</h3>
+                    <div className={styles.buttonContainer}>
+                        <button className={styles.A2Cbtn}>Add To Collection</button>
+                        <button className={styles.likeBtn} onClick={handleLikeClick}>
+                            {like ? (
+                                <AiFillHeart style={{ fontSize: '26px' }} />
+                            ) : (
+                                <AiOutlineHeart style={{ fontSize: '26px' }} />
+                            )}
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
             {showDetail && (
                 <div className={styles.itemCardDetail}>
                     <div className={styles.detail} ref={detailRef}>

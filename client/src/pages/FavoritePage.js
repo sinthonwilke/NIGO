@@ -29,7 +29,7 @@ function FavoritePage() {
             <div className={styles.gameContainer}>
                 {gameList.map(gameData => (
                     <div className={styles.item} key={gameData.id}>
-                        <Games gameData={gameData} />
+                        <Games gameData={gameData} fromFavPage={true} />
                     </div>
                 ))}
             </div>
