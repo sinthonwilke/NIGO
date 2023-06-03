@@ -4,9 +4,10 @@ const fs = require('fs');
 
 
 const getGames = asyncHandler(async (req, res) => {
-    const games = await gameSchema.find();
+    const games = await gameSchema.find().sort({ createdAt: -1 });
     res.status(200).json(games);
 });
+
 
 const getGame = asyncHandler(async (req, res) => {
     const game = await gameSchema.findById(req.params.reqId);

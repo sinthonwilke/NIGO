@@ -2,26 +2,42 @@ import Nav from '../components/Nav';
 import Games from '../components/Games';
 import gStyles from '../styles/global.module.css';
 import React, { useEffect, useState } from 'react';
-
+import axios from 'axios';
+import { gameListUrl } from '../services/apiList';
+import styles from '../styles/GamePage.module.css';
 
 function GamePage() {
-    const gameData = {
-        title: 'Game Title',
-        description: 'Game Descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
-        releaseDate: '2023-06-03',
-        platform: 'PC',
-        tags: ['Tag1', 'Tag2', 'Tag3'],
-        imgUrl: 'assets/img/s35eqy-1685642025780.jpg',
-        storeLink: 'https://www.google.com',
-    };
+    const [gameList, setGameList] = useState([]);
+
+    useEffect(() => {
+        axios.get(gameListUrl)
+            .then(response => {
+                const updatedGameList = response.data.map((gameData, index) => ({
+                    ...gameData,
+                    id: index + 1
+                }));
+                setGameList(updatedGameList);
+            })
+            .catch(error => {
+                console.error('Error fetching game list:', error);
+            });
+    }, []);
+
+    console.log(gameList);
 
     return (
         <>
             <Nav />
             <h1 className={gStyles.head}>Games</h1>
-            <Games gameData={gameData} />
+            <div className={styles.gameContainer}>
+                {gameList.map(gameData => (
+                    <div className={styles.item} key={gameData.id}>
+                        <Games gameData={gameData} />
+                    </div>
+                ))}
+            </div>
         </>
     );
-}
+};
 
 export default GamePage;
