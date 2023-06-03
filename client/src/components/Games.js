@@ -1,27 +1,41 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Games.module.css';
-import gameImg from '../assets/example/gameImg.jpg';
-import { AiOutlineHeart, AiFillCloseSquare } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillCloseSquare, AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
+import { favUrl } from '../services/apiList'
+import authConfig from '../services/authConfig';
 
 function Games({ gameData }) {
-
     const [imageSrc, setImageSrc] = useState('');
+    const [showDetail, setShowDetail] = useState(false);
+    const detailRef = useRef(null);
+    const [like, setLike] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' })
+        const fetchLikeStatus = async () => {
+            try {
+                const response = await axios.get(favUrl + gameData._id, authConfig);
+                setLike(response.data);
+            } catch (error) {
+                console.error('Failed to fetch like status:', error);
+            }
+        };
+
+        fetchLikeStatus();
+    }, []);
+
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:3000/' + gameData.imgUrl, { responseType: 'blob' })
             .then(response => {
                 const imageURL = URL.createObjectURL(response.data);
                 setImageSrc(imageURL);
             });
     }, []);
 
-
-    const [showDetail, setShowDetail] = useState(false);
-    const detailRef = useRef(null);
-
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = event => {
             if (detailRef.current && !detailRef.current.contains(event.target)) {
                 setShowDetail(false);
             }
@@ -38,6 +52,19 @@ function Games({ gameData }) {
         setShowDetail(!showDetail);
     };
 
+    const handleLikeClick = async () => {
+        setLike(prevLike => !prevLike);
+        try {
+            if (like) {
+                await axios.delete(favUrl + gameData._id, authConfig);
+            } else {
+                await axios.post(favUrl + gameData._id, {}, authConfig);
+            }
+        } catch (error) {
+            console.error('Failed to update like status:', error);
+        }
+    };
+
     const releaseDate = new Date(gameData.releaseDate);
     const formattedDate = releaseDate.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -45,19 +72,18 @@ function Games({ gameData }) {
         day: 'numeric',
     });
 
-
     return (
         <div>
             <div className={styles.itemCard}>
                 <button className={styles.btnContent} onClick={handleButtonClick}>
-                    <div>
-                        {imageSrc && <img src={imageSrc} />}
-                    </div>
+                    <div>{imageSrc && <img src={imageSrc} />}</div>
                 </button>
                 <h3>{gameData.title}</h3>
                 <div className={styles.buttonContainer}>
                     <button className={styles.A2Cbtn}>Add To Collection</button>
-                    <button className={styles.likeBtn}><AiOutlineHeart style={{ fontSize: '26px' }} /></button>
+                    <button className={styles.likeBtn} onClick={handleLikeClick}>
+                        {like ? <AiFillHeart style={{ fontSize: '26px' }} /> : <AiOutlineHeart style={{ fontSize: '26px' }} />}
+                    </button>
                 </div>
             </div>
             {showDetail && (
@@ -65,7 +91,9 @@ function Games({ gameData }) {
                     <div className={styles.detail} ref={detailRef}>
                         <div className={styles.leftDetail}>
                             {imageSrc && <img src={imageSrc} />}
-                            <button className={styles.exitBtn} onClick={handleButtonClick}><AiFillCloseSquare /></button>
+                            <button className={styles.exitBtn} onClick={handleButtonClick}>
+                                <AiFillCloseSquare />
+                            </button>
                         </div>
                         <div className={styles.rightDetail}>
                             <h3>{gameData.title}</h3>
@@ -73,11 +101,14 @@ function Games({ gameData }) {
                             <p className={styles.tags}>Release Date: {formattedDate}</p>
                             <p className={styles.tags}>Platform: {gameData.platform}</p>
                             <div className={styles.lastLine}>
-                                <p className={styles.tags}>{gameData.tags.map(tag => `#${tag}`).join(' ')}</p>
-                                <a href={gameData.link} target="_blank">Store Link</a>
+                                <p className={styles.tags}>
+                                    {gameData.tags.map(tag => `#${tag}`).join(' ')}
+                                </p>
+                                <a href={gameData.link} target="_blank" rel="noopener noreferrer">
+                                    Store Link
+                                </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             )}

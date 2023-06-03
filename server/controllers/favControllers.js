@@ -7,11 +7,17 @@ const getFavs = asyncHandler(async (req, res) => {
     res.status(200).json(favs);
 });
 
+const isFav = asyncHandler(async (req, res) => {
+    const fav = await favSchema.findOne({ game_id: req.params.reqId });
+    if (fav) {
+        res.status(200).json(true);
+    } else {
+        res.status(200).json(false);
+    }
+});
+
 const createFav = asyncHandler(async (req, res) => {
-    const createdFav = await favSchema.create({
-        user_id: req.user,
-        game_id: req.params.reqId
-    });
+    const createdFav = await favSchema.create({ user_id: req.user, game_id: req.params.reqId });
     res.status(201).json("created");
 });
 
@@ -22,6 +28,7 @@ const deleteFav = asyncHandler(async (req, res) => {
 
 module.exports = {
     getFavs,
+    isFav,
     createFav,
     deleteFav
 };
