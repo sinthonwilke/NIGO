@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { favGamesUrl } from '../services/apiList';
 import styles from '../styles/GamePage.module.css';
+import loadStyle from '../styles/Loading.module.css';
 import authConfig from '../services/authConfig';
 
 function FavoritePage() {
@@ -28,20 +29,33 @@ function FavoritePage() {
     }, []);
 
     if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    return (
-        <>
-            <h1 className={gStyles.head}>Favorite</h1>
-            <div className={styles.gameContainer}>
-                {gameList.map(gameList => (
-                    <div className={styles.item} key={gameList.id}>
-                        <Games gameList={gameList} fromFavPage={true} />
+        return (
+            <>
+                <div className={loadStyle.loadBody}>
+                    <div className={loadStyle.loading}>
+                        <div className={loadStyle.dot}></div>
+                        <div className={loadStyle.dot}></div>
+                        <div className={loadStyle.dot}></div>
+                        <div className={loadStyle.dot}></div>
+                        <div className={loadStyle.dot}></div>
                     </div>
-                ))}
-            </div>
-        </>
-    );
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <h1 className={gStyles.head}>Favorite</h1>
+                <div className={styles.gameContainer}>
+                    {gameList.map(gameList => (
+                        <div className={styles.item} key={gameList.id}>
+                            <Games gameList={gameList} fromFavPage={true} />
+                        </div>
+                    ))}
+                </div>
+            </>
+        );
+    }
 }
 
 export default FavoritePage;
