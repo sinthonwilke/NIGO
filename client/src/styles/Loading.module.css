@@ -82,3 +82,11 @@
         opacity: 0;
     }
 }
+
+@media (max-width: 768px) {
+    .loading .dot {
+        width: 1.25em;
+        height: 1.25em;
+        margin: 0.5em;
+    }
+}
