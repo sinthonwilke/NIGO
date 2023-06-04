@@ -81,7 +81,7 @@ function Nav() {
                 </div>
 
             </div>
-            <div style={{ marginBottom: '110px' }}></div>
+            <div style={{ marginBottom: '120px' }}></div>
         </>
     );
 }
