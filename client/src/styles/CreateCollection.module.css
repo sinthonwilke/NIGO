@@ -1,0 +1,85 @@
+.form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50%;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s, width 0.3s;
+}
+
+.form input {
+    height: 90%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 16px;
+    color: #000;
+    box-sizing: border-box;
+    padding-left: 32px;
+    padding-right: 86px;
+    width: 100%;
+    transition: padding 0.3s, width 0.3s;
+}
+
+.form input::placeholder {
+    font-size: 14px;
+}
+
+.form button {
+    position: absolute;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    right: 0;
+    padding: 0 16px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+    transition: padding 0.3s;
+}
+
+.form button .icon {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+    fill: #000;
+}
+
+.form button:hover .icon {
+    fill: #ccc;
+}
+
+/* Responsive Styles */
+
+@media only screen and (max-width: 768px) {
+    .form {
+        width: 80%;
+    }
+
+    .form input {
+        padding-right: 60px;
+    }
+
+    .form button {
+        padding: 0 10px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .form {
+        width: 90%;
+    }
+
+    .form input {
+        padding-right: 40px;
+        font-size: 14px;
+    }
+
+    .form button {
+        padding: 0 8px;
+    }
+}

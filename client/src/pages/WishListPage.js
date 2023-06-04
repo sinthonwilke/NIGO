@@ -1,10 +1,11 @@
-import Nav from '../components/Nav';
-import WishListMenu from '../components/WishListMenu';
+import gStyles from '../styles/global.module.css';
+import CreateCollection from '../components/CreateCollection';
 
 function WishListPage() {
     return (
         <>
-            <WishListMenu />
+            <h1 className={gStyles.head}>WishList</h1>
+            <CreateCollection />
         </>
     );
 }
