@@ -13,6 +13,7 @@ function CreateCollection() {
         event.preventDefault();
         setInputValue('');
         const response = await axios.post(collectionUrl, { name: inputValue }, authConfig);
+        window.location.reload();
     };
 
     const handleChange = (event) => {

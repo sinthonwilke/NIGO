@@ -13,10 +13,11 @@ const {
 
 router.get('/', validateTokenHandler, getCollection);
 router.put('/:reqId', validateTokenHandler, updateCollection);
-router.get('/game', validateTokenHandler, getCollectionGame);
 router.post('/', validateTokenHandler, createCollection);
 router.delete('/:reqId', validateTokenHandler, deleteCollection);
-router.post('/:reqId', validateTokenHandler, addGameToCollection);
-router.delete('/:reqId', validateTokenHandler, removeGameFromCollection);
+
+router.get('/game', validateTokenHandler, getCollectionGame);
+router.post('/game', validateTokenHandler, addGameToCollection);
+router.delete('/game/:reqId', validateTokenHandler, removeGameFromCollection);
 
 module.exports = router;

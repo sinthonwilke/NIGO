@@ -23,6 +23,11 @@ function Collection(collection) {
         setIsRenaming(!isRenaming);
     };
 
+    const handleRemove = async () => {
+        await axios.delete(collectionUrl + collection.collection._id, authConfig);
+        window.location.reload();
+    };
+
     const handleTextChange = (event) => {
         setUpdatedTextValue(event.target.value);
     };
@@ -56,7 +61,7 @@ function Collection(collection) {
                             {showMore ? <CgMoreO className={styles.icon} /> : <CgMoreVerticalO className={styles.icon} />}
                         </button>
                         <button className={styles.btn} onClick={handleRename}><BiRename className={styles.icon} /></button>
-                        <button className={styles.btn}><TbTrashXFilled className={styles.icon} /></button>
+                        <button className={styles.btn} onClick={handleRemove}><TbTrashXFilled className={styles.icon} /></button>
                     </div>
                 </div>
                 <div className={styles.line} />
@@ -66,13 +71,6 @@ function Collection(collection) {
                             {/* <div className={styles.item} key={game._id}>
                                 <Games game={game} favList={favList} />
                             </div> */}
-
-                            <img src={example} />
-                            <img src={example} />
-                            <img src={example} />
-                            <img src={example} />
-                            <img src={example} />
-                            <img src={example} />
                         </>
                     </div>
                 </div>

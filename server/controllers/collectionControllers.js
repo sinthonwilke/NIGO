@@ -10,10 +10,10 @@ const getCollection = asyncHandler(async (req, res) => {
 });
 
 const getCollectionGame = asyncHandler(async (req, res) => {
-    const collection = await collectionSchema.find({ user_id: req.user }, { 'game_id': 1, '_id': 0 }).lean();
-    const collectionGameIds = collection.map(item => item.game_id);
-    const collectionGames = await gameSchema.find({ _id: { $in: collectionGameIds } });
-    res.status(200).json(collectionGames);
+    const games = await collectionGamesSchema.find({
+        collection_id: req.body.collection_id,
+    }).select({ game_id: 1 });
+    res.status(200).json(games);
 });
 
 const createCollection = asyncHandler(async (req, res) => {
@@ -31,16 +31,22 @@ const updateCollection = asyncHandler(async (req, res) => {
 
 const deleteCollection = asyncHandler(async (req, res) => {
     await collectionSchema.findOneAndDelete({ _id: req.params.reqId });
+    await collectionGamesSchema.deleteMany({ collection_id: req.params.reqId });
     res.status(200).json("deleted");
 });
 
 const addGameToCollection = asyncHandler(async (req, res) => {
-    await collectionSchema.findOneAndUpdate({ _id: req.params.reqId }, { $addToSet: { game_id: req.body.game_id } });
+    await collectionGamesSchema.create({
+        collection_id: req.body.collection_id,
+        game_id: req.body.game_id,
+    });
     res.status(200).json("added");
 });
 
 const removeGameFromCollection = asyncHandler(async (req, res) => {
-    await collectionSchema.findOneAndUpdate({ _id: req.params.reqId }, { $pull: { game_id: req.body.game_id } });
+    await collectionGamesSchema.findOneAndDelete({
+        _id: req.params.reqId
+    });
     res.status(200).json("removed");
 });
 
