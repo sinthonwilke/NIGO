@@ -49,7 +49,6 @@ const addGameToCollection = asyncHandler(async (req, res) => {
 });
 
 const removeGameFromCollection = asyncHandler(async (req, res) => {
-    console.log(req.params.reqCol, req.params.reqGam)
     await collectionGamesSchema.findOneAndDelete({
         collection_id: req.params.reqCol,
         game_id: req.params.reqGam

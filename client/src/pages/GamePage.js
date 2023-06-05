@@ -16,6 +16,7 @@ function GamePage() {
     const [isPopCollection, setIsPopCollection] = useState(false);
     const [collectionList, setCollectionList] = useState([]);
     const [gameId, setGameId] = useState(null);
+    const [isPopCollectionVisible, setPopCollectionVisible] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,8 +49,6 @@ function GamePage() {
         fetchData();
     }, []);
 
-    const [isPopCollectionVisible, setPopCollectionVisible] = useState(false);
-
     const handleChildSignal = (gameId) => {
         setIsMessageReceived(true);
         setGameId(gameId);
@@ -59,7 +58,6 @@ function GamePage() {
     const handleClosePopCollection = () => {
         setPopCollectionVisible(false);
     };
-
 
     if (isLoading) {
         return (

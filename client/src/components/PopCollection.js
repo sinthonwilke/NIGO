@@ -6,10 +6,7 @@ import authConfig from '../services/authConfig';
 function PopCollection({ onClose, collectionList, gameId }) {
 
     const clickHandler = async (collectionId) => {
-        console.log(collectionId);
-        console.log(gameId);
-        const addGame = await axios.post(collectionGamesUrl, { collection_id: collectionId, game_id: gameId }, authConfig)
-        console.log(addGame);
+        await axios.post(collectionGamesUrl, { collection_id: collectionId, game_id: gameId }, authConfig)
     };
 
     return (
