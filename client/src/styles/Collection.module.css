@@ -41,6 +41,10 @@
     margin-bottom: 16px;
 }
 
+.showmore {
+    padding-bottom: 16px;
+}
+
 .switchBtn {
     margin: 0 auto;
     display: flex;
@@ -72,4 +76,8 @@
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
     transition: background-color 0.3s, box-shadow 0.3s, width 0.3s;
+}
+
+.emptyText {
+    height: 24px;
 }

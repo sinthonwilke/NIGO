@@ -6,6 +6,7 @@ import { TbTrashXFilled } from 'react-icons/tb';
 import { collectionUrl } from '../services/apiList';
 import authConfig from '../services/authConfig';
 import axios from 'axios';
+import example from '../assets/example.jpg';
 
 function Collection(collection) {
     const [textValue, setTextValue] = useState(collection.collection.name);
@@ -48,7 +49,7 @@ function Collection(collection) {
                             />
                         </form>
                     ) : (
-                        <p className={styles.headerText}>{textValue}</p>
+                        <p className={`${styles.headerText} ${textValue ? '' : styles.emptyText}`}>{textValue}</p>
                     )}
                     <div className={styles.btnGroup}>
                         <button className={styles.switchBtn} onClick={handleViewMore}>
@@ -65,6 +66,13 @@ function Collection(collection) {
                             {/* <div className={styles.item} key={game._id}>
                                 <Games game={game} favList={favList} />
                             </div> */}
+
+                            <img src={example} />
+                            <img src={example} />
+                            <img src={example} />
+                            <img src={example} />
+                            <img src={example} />
+                            <img src={example} />
                         </>
                     </div>
                 </div>
