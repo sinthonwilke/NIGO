@@ -10,9 +10,14 @@ const getCollection = asyncHandler(async (req, res) => {
 });
 
 const getCollectionGame = asyncHandler(async (req, res) => {
-    const games = await collectionGamesSchema.find({
-        collection_id: req.body.collection_id,
+    const gamesId = await collectionGamesSchema.find({
+        collection_id: req.params.reqId,
     }).select({ game_id: 1 });
+    const games = await gameSchema.find({
+        _id: {
+            $in: gamesId.map((game) => game.game_id),
+        },
+    });
     res.status(200).json(games);
 });
 

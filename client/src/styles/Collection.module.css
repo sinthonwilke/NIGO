@@ -35,15 +35,7 @@
     margin: -8px 0 32px 0;
 }
 
-.item {
-    display: flex;
-    overflow-x: auto;
-    margin-bottom: 16px;
-}
 
-.showmore {
-    padding-bottom: 16px;
-}
 
 .switchBtn {
     margin: 0 auto;
@@ -80,4 +72,21 @@
 
 .emptyText {
     height: 24px;
+}
+
+
+.item {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 16px;
+}
+
+.showmore {
+    padding-bottom: 16px;
+}
+
+.gameContainer {}
+
+.gameItem {
+    padding-bottom: 16px;
 }

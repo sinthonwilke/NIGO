@@ -16,7 +16,7 @@ router.put('/:reqId', validateTokenHandler, updateCollection);
 router.post('/', validateTokenHandler, createCollection);
 router.delete('/:reqId', validateTokenHandler, deleteCollection);
 
-router.get('/game', validateTokenHandler, getCollectionGame);
+router.get('/game/:reqId', validateTokenHandler, getCollectionGame);
 router.post('/game', validateTokenHandler, addGameToCollection);
 router.delete('/game/:reqId', validateTokenHandler, removeGameFromCollection);
 

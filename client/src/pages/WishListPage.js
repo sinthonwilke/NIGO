@@ -19,7 +19,6 @@ function WishListPage() {
                     id: index + 1
                 }));
                 setCollectionList(updatedCollectionList);
-
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);

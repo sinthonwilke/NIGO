@@ -14,4 +14,5 @@ export const favUrl = url + 'fav/';
 
 // Collections
 export const collectionUrl = url + 'collection/';
+export const collectionGamesUrl = url + 'collection/game/';
 

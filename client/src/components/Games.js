@@ -5,7 +5,7 @@ import axios from 'axios';
 import { favUrl } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
-function Games({ game, fromFavPage = false, favList = [] }) {
+function Games({ game, favList = [], fromFavPage = false, fromColPage = false }) {
 
     const [imageSrc, setImageSrc] = useState('');
     const [showDetail, setShowDetail] = useState(false);
