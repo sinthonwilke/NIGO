@@ -16,15 +16,18 @@ function CreateCollection() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={style.form}>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleChange}
-                placeholder="Add new collection here..."
-            />
-            <button type="submit"><BiAddToQueue className={style.icon} /></button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit} className={style.form}>
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleChange}
+                    placeholder="Add new collection here..."
+                />
+                <button type="submit"><BiAddToQueue className={style.icon} /></button>
+            </form>
+            <div style={{ marginBottom: '32px' }} ></div>
+        </>
     );
 }
 
