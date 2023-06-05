@@ -51,3 +51,26 @@
     font-size: 14px;
     text-decoration: underline;
 }
+
+.headerText {
+    font-size: 1.25rem;
+    color: white;
+    margin: 16px 0;
+}
+
+.form {
+    flex: 1;
+    margin-right: 32px;
+}
+
+.form input {
+    /* padding-left: 16px; */
+    margin-bottom: 14px;
+    background-color: white;
+    border: none;
+    color: black;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s, width 0.3s;
+}
