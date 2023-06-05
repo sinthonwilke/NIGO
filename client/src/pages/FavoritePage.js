@@ -47,9 +47,9 @@ function FavoritePage() {
             <>
                 <h1 className={gStyles.head}>Favorite</h1>
                 <div className={styles.gameContainer}>
-                    {gameList.map(gameList => (
-                        <div className={styles.item} key={gameList.id}>
-                            <Games gameList={gameList} fromFavPage={true} />
+                    {gameList.map(game => (
+                        <div className={styles.item} key={game._id}>
+                            <Games game={game} fromFavPage={true} />
                         </div>
                     ))}
                 </div>

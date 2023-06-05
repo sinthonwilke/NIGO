@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import gStyles from '../styles/global.module.css';
 import style from '../styles/CreateCollection.module.css';
 import { BiAddToQueue } from 'react-icons/bi';
+import axios from 'axios';
+import { collectionUrl } from '../services/apiList';
+import authConfig from '../services/authConfig';
 
 function CreateCollection() {
     const [inputValue, setInputValue] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setInputValue('');
+        const response = await axios.post(collectionUrl, { name: inputValue }, authConfig);
     };
 
     const handleChange = (event) => {
@@ -22,7 +26,7 @@ function CreateCollection() {
                     type="text"
                     value={inputValue}
                     onChange={handleChange}
-                    placeholder="Add new collection here..."
+                    placeholder='Add new collection here...'
                 />
                 <button type="submit"><BiAddToQueue className={style.icon} /></button>
             </form>

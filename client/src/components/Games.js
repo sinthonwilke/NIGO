@@ -5,21 +5,23 @@ import axios from 'axios';
 import { favUrl } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
-function Games({ gameList, fromFavPage = false, favList = [] }) {
+function Games({ game, fromFavPage = false, favList = [] }) {
+
     const [imageSrc, setImageSrc] = useState('');
     const [showDetail, setShowDetail] = useState(false);
     const [like, setLike] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const detailRef = useRef(null);
+
     useEffect(() => {
         const fetchLikeStatus = () => {
-            const isLiked = favList.some((favItem) => favItem.game_id === gameList._id);
+            const isLiked = favList.some((favItem) => favItem.game_id === game._id);
             setLike(isLiked);
         };
 
         const loadImage = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/' + gameList.imgUrl, { responseType: 'blob' });
+                const response = await axios.get('http://localhost:3000/' + game.imgUrl, { responseType: 'blob' });
                 const imageURL = URL.createObjectURL(response.data);
                 setImageSrc(imageURL);
                 setIsLoading(false);
@@ -55,16 +57,16 @@ function Games({ gameList, fromFavPage = false, favList = [] }) {
         setLike(prevLike => !prevLike);
         try {
             if (like) {
-                await axios.delete(favUrl + gameList._id, authConfig);
+                await axios.delete(favUrl + game._id, authConfig);
             } else {
-                await axios.post(favUrl + gameList._id, {}, authConfig);
+                await axios.post(favUrl + game._id, {}, authConfig);
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const releaseDate = new Date(gameList.releaseDate);
+    const releaseDate = new Date(game.releaseDate);
     const formattedDate = releaseDate.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -80,7 +82,7 @@ function Games({ gameList, fromFavPage = false, favList = [] }) {
                     <button className={styles.btnContent} onClick={handleButtonClick}>
                         <div>{imageSrc && <img src={imageSrc} />}</div>
                     </button>
-                    <h3>{gameList.title}</h3>
+                    <h3>{game.title}</h3>
                     <div className={styles.buttonContainer}>
                         <button className={styles.A2Cbtn}>Add To Collection</button>
                         <button className={styles.likeBtn} onClick={handleLikeClick}>
@@ -103,15 +105,15 @@ function Games({ gameList, fromFavPage = false, favList = [] }) {
                             </button>
                         </div>
                         <div className={styles.rightDetail}>
-                            <h3>{gameList.title}</h3>
-                            <p>{gameList.description}</p>
+                            <h3>{game.title}</h3>
+                            <p>{game.description}</p>
                             <p className={styles.tags}>Release Date: {formattedDate}</p>
-                            <p className={styles.tags}>Platform: {gameList.platform}</p>
+                            <p className={styles.tags}>Platform: {game.platform}</p>
                             <div className={styles.lastLine}>
                                 <p className={styles.tags}>
-                                    {gameList.tags.map(tag => `#${tag}`).join(' ')}
+                                    {game.tags.map(tag => `#${tag}`).join(' ')}
                                 </p>
-                                <a href={gameList.link} target="_blank" rel="noopener noreferrer">
+                                <a href={game.link} target="_blank" rel="noopener noreferrer">
                                     Store Link
                                 </a>
                             </div>

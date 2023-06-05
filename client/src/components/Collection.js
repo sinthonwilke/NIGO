@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import styles from '../styles/Collection.module.css';
 import { BiRename } from 'react-icons/bi';
-import example from '../assets/example.jpg';
 import { CgMoreO, CgMoreVerticalO } from 'react-icons/cg';
 import { TbTrashXFilled } from 'react-icons/tb';
+import { collectionUrl } from '../services/apiList';
+import authConfig from '../services/authConfig';
+import axios from 'axios';
 
-
-function Collection() {
-    const [textValue, setTextValue] = useState('Test');
+function Collection(collection) {
+    const [textValue, setTextValue] = useState(collection.collection.name);
     const [showMore, setShowMore] = useState(true);
     const [isRenaming, setIsRenaming] = useState(false);
     const [updatedTextValue, setUpdatedTextValue] = useState(textValue);
-
 
     const handleViewMore = () => {
         setShowMore(!showMore);
@@ -26,10 +26,11 @@ function Collection() {
         setUpdatedTextValue(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setTextValue(updatedTextValue);
         setIsRenaming(false);
+        await axios.put(collectionUrl + collection.collection._id, { name: updatedTextValue }, authConfig);
     };
 
     return (
@@ -61,11 +62,9 @@ function Collection() {
                 <div className={`${styles.body} ${showMore ? styles.showMore : ''}`}>
                     <div className={showMore ? styles.item : styles.showmore}>
                         <>
-                            <img src={example} alt="example" />
-                            <img src={example} alt="example" />
-                            <img src={example} alt="example" />
-                            <img src={example} alt="example" />
-                            <img src={example} alt="example" />
+                            {/* <div className={styles.item} key={game._id}>
+                                <Games game={game} favList={favList} />
+                            </div> */}
                         </>
                     </div>
                 </div>
