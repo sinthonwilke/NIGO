@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Games.module.css';
 import { AiOutlineHeart, AiFillCloseSquare, AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
-import { favUrl } from '../services/apiList';
+import { favUrl, collectionGamesUrl } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
-function Games({ game, favList = [], fromFavPage = false, fromColPage = false }) {
+function Games({ game, favList = [], fromFavPage = false, fromColPage = false, onSignal }) {
 
     const [imageSrc, setImageSrc] = useState('');
     const [showDetail, setShowDetail] = useState(false);
@@ -66,6 +66,15 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false })
         }
     };
 
+    const handleAddCol = async () => {
+        onSignal(game._id);
+    };
+
+    const handleRemoveCol = async () => {
+        await axios.delete(collectionGamesUrl + fromColPage + "&" + game._id, authConfig);
+        window.location.reload();
+    };
+
     const releaseDate = new Date(game.releaseDate);
     const formattedDate = releaseDate.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -84,7 +93,12 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false })
                     </button>
                     <h3>{game.title}</h3>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.A2Cbtn}>Add To Collection</button>
+                        {!fromColPage ? (
+                            <button className={styles.A2Cbtn} onClick={handleAddCol}>Add To Collection</button>
+                        ) : (
+                            <button className={styles.A2Cbtn} onClick={handleRemoveCol}>Remove From Collection</button>
+
+                        )}
                         <button className={styles.likeBtn} onClick={handleLikeClick}>
                             {like ? (
                                 <AiFillHeart style={{ fontSize: '26px' }} />

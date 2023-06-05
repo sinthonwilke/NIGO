@@ -18,6 +18,6 @@ router.delete('/:reqId', validateTokenHandler, deleteCollection);
 
 router.get('/game/:reqId', validateTokenHandler, getCollectionGame);
 router.post('/game', validateTokenHandler, addGameToCollection);
-router.delete('/game/:reqId', validateTokenHandler, removeGameFromCollection);
+router.delete('/game/:reqCol&:reqGam', validateTokenHandler, removeGameFromCollection);
 
 module.exports = router;

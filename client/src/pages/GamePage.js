@@ -2,15 +2,20 @@ import Games from '../components/Games';
 import gStyles from '../styles/global.module.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { gameListUrl, favUrl } from '../services/apiList';
+import { gameListUrl, favUrl, collectionUrl } from '../services/apiList';
 import styles from '../styles/GamePage.module.css';
 import loadStyle from '../styles/Loading.module.css';
 import authConfig from '../services/authConfig';
+import PopCollection from '../components/PopCollection';
 
 function GamePage() {
     const [gameList, setGameList] = useState([]);
     const [favList, setFavList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isMessageReceived, setIsMessageReceived] = useState(false);
+    const [isPopCollection, setIsPopCollection] = useState(false);
+    const [collectionList, setCollectionList] = useState([]);
+    const [gameId, setGameId] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,6 +33,13 @@ function GamePage() {
                 }));
                 setFavList(updatedFavList);
 
+                const collectionListRes = await axios.get(collectionUrl, authConfig);
+                const updatedCollectionList = collectionListRes.data.map((collectionList, index) => ({
+                    ...collectionList,
+                    id: index + 1
+                }));
+                setCollectionList(updatedCollectionList);
+
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -35,6 +47,19 @@ function GamePage() {
         };
         fetchData();
     }, []);
+
+    const [isPopCollectionVisible, setPopCollectionVisible] = useState(false);
+
+    const handleChildSignal = (gameId) => {
+        setIsMessageReceived(true);
+        setGameId(gameId);
+        setPopCollectionVisible(!isPopCollectionVisible);
+    };
+
+    const handleClosePopCollection = () => {
+        setPopCollectionVisible(false);
+    };
+
 
     if (isLoading) {
         return (
@@ -58,10 +83,13 @@ function GamePage() {
                 <div className={styles.gameContainer}>
                     {gameList.map(game => (
                         <div className={styles.item} key={game._id}>
-                            <Games game={game} favList={favList} />
+                            <Games game={game} favList={favList} onSignal={handleChildSignal} />
                         </div>
                     ))}
                 </div>
+                {isPopCollectionVisible && (
+                    <PopCollection onClose={handleClosePopCollection} collectionList={collectionList} gameId={gameId} />
+                )}
             </>
         );
     }

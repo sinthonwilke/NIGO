@@ -44,8 +44,6 @@ function Collection(collection) {
         fetchData();
     }, []);
 
-    console.log(gameList);
-
     const handleViewMore = () => {
         setShowMore(!showMore);
     };
@@ -116,7 +114,7 @@ function Collection(collection) {
                         <div className={showMore ? styles.showless : styles.showmore}>
                             {gameList.map(game => (
                                 <div className={styles.gameItem} key={game._id}>
-                                    <Games game={game} favList={favList} fromColPage={true} />
+                                    <Games game={game} favList={favList} fromColPage={collection.collection._id} />
                                 </div>
                             ))}
                         </div>
