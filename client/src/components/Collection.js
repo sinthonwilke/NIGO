@@ -113,14 +113,12 @@ function Collection(collection) {
                     </div>
                     <div className={styles.line} />
                     <div className={`${styles.body} ${showMore ? styles.showMore : ''}`}>
-                        <div className={showMore ? styles.item : styles.showmore}>
-                            <div className={styles.gameContainer}>
-                                {gameList.map(game => (
-                                    <div className={styles.gameItem} key={game._id}>
-                                        <Games game={game} favList={favList} fromColPage={true} />
-                                    </div>
-                                ))}
-                            </div>
+                        <div className={showMore ? styles.showless : styles.showmore}>
+                            {gameList.map(game => (
+                                <div className={styles.gameItem} key={game._id}>
+                                    <Games game={game} favList={favList} fromColPage={true} />
+                                </div>
+                            ))}
                         </div>
                     </div>
 
