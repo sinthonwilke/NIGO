@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const uploadUserImg = require('../middleware/storage');
+const { uploadUserImg } = require('../middleware/storage');
 const validateTokenHandler = require('../middleware/validateTokenHandler');
 const {
     registerUser,

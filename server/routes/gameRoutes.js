@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const uploadImg = require('../middleware/storage');
+const { uploadImg } = require('../middleware/storage');
 const {
     getGames,
     getGame,

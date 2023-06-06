@@ -8,7 +8,6 @@ const getGames = asyncHandler(async (req, res) => {
     res.status(200).json(games);
 });
 
-
 const getGame = asyncHandler(async (req, res) => {
     const game = await gameSchema.findById(req.params.reqId);
     res.status(200).json(game);
@@ -29,7 +28,6 @@ const createGame = asyncHandler(async (req, res) => {
     res.status(201).send('created');
 });
 
-
 const updateGame = asyncHandler(async (req, res) => {
     const { title, releaseDate, description, platform, link, tags } = req.body;
     const updateFields = {
@@ -40,12 +38,14 @@ const updateGame = asyncHandler(async (req, res) => {
         link,
         tags
     };
+
     if (req.file) {
         const oldImgUrl = await gameSchema.findById(req.params.reqId);
         deleteImg(oldImgUrl.imgUrl);
         updateFields.imgUrl = req.file.path;
     }
-    const updatedGame = await gameSchema.findByIdAndUpdate(req.params.reqId, updateFields);
+
+    await gameSchema.findByIdAndUpdate(req.params.reqId, updateFields);
     res.status(200).send('updated');
 });
 

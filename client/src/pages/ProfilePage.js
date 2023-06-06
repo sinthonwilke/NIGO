@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import example from '../assets/example.jpg';
 import Loading from '../components/Loading';
-import { userUrl } from '../services/apiList';
+import { userUrl, url } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
 function ProfilePage() {
@@ -19,14 +19,21 @@ function ProfilePage() {
     const [isErrorMessage, setIsErrorMessage] = useState();
     const [profileImg, setProfileImg] = useState(example);
     const [isLoading, setIsLoading] = useState(true);
+    const [imageSrc, setImageSrc] = useState('');
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const userRes = await axios.get(userUrl, authConfig);
                 const userDetail = userRes.data;
+
+                const response = await axios.get(url + userDetail.profilePicture, { responseType: 'blob' });
+                const imageURL = URL.createObjectURL(response.data);
+
                 setUserName(userDetail.username);
                 setBio(userDetail.bio);
+                setImageSrc(imageURL);
 
                 setIsLoading(false);
             } catch (error) {
@@ -36,14 +43,14 @@ function ProfilePage() {
         fetchData();
     }, []);
 
-
-
     const handleUserNameEdit = (e) => {
         setIsUserNameEditing(!isUserNameEditing);
+        setUserNameInput(userName);
     };
 
     const handleBioEdit = (e) => {
         setIsBioEditing(!isBioEditing);
+        setBioInput(bio);
     };
 
     const handleUserNameChange = (e) => {
@@ -72,8 +79,13 @@ function ProfilePage() {
         e.preventDefault();
         setIsUserNameEditing(false);
 
-        setUserName(userNameInput);
-        displayErrorMessage('User name updated');
+        try {
+            setUserName(userNameInput);
+            displayErrorMessage('User name updated');
+        } catch (error) {
+            displayErrorMessage(error);
+
+        };
     };
 
     const handleBioSubmit = (e) => {
@@ -107,23 +119,25 @@ function ProfilePage() {
     if (isLoading) {
         return (
             <>
+                <h1 className={gStyles.head}>Profile</h1>
+
                 <Loading />
             </>
         )
     } else {
         return (
             <>
+                <h1 className={gStyles.head}>Profile</h1>
+
                 <div className={styles.container}>
 
                     {errorMessage && (
-                        <div className={`${styles.msg} ${isErrorMessage ? styles.red : styles.white}`}>{errorMessage}</div>
+                        <div className={`${styles.msg} ${isErrorMessage ? styles.red : styles.green}`}>{errorMessage}</div>
                     )}
-
-                    <h1 className={gStyles.head}>Profile</h1>
 
                     <form onSubmit={handleProfileImgSubmit}>
                         <label htmlFor="profileImg">
-                            <img src={profileImg} className={styles.profileBtn} />
+                            <img src={imageSrc} className={styles.profileBtn} />
                             <input
                                 type="file"
                                 id="profileImg"

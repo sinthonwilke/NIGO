@@ -17,10 +17,10 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    margin-bottom: 32px;
     background-color: white;
     overflow: hidden;
     position: relative;
+    margin: 32px 0;
 }
 
 .profileBtn img {
@@ -37,13 +37,12 @@
 
 .msg {
     position: absolute;
-    top: 0;
+    top: 32px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: rgb(30, 30, 30);
     z-index: 999;
     border-radius: 50px;
     width: 50%;
@@ -55,7 +54,11 @@
 }
 
 .red {
-    color: red;
+    color: #e74c3c;
+}
+
+.green {
+    color: #5cb85c;
 }
 
 h3 {

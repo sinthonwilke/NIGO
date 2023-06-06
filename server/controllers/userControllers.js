@@ -1,9 +1,10 @@
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const tokenSchema = require('../models/tokenModel');
 const user = require('../models/userModel');
+const fs = require('fs');
+
 
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
@@ -66,8 +67,41 @@ const currentUser = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
+    const { username, bio } = req.body;
+    const updatedFields = {
+        username: username,
+        bio: bio,
+    };
+
+    console.log(req.file.path);
+
+    const usernameExist = await user.findOne({ username });
+
+    if (usernameExist) {
+        res.status(400).send('Username already exists.');
+    }
+
+    if (req.file) {
+        const oldProfilePicture = await user.findById(req.user);
+        if (oldProfilePicture.profilePicture !== 'assets/userImg/default.jpg') {
+            deleteImg(oldProfilePicture.profilePicture);
+            updatedFields.profilePicture = req.file.path;
+        }
+    }
+
+    await user.findByIdAndUpdate(req.user, updatedFields);
     res.status(200).send('User updated.');
 });
+
+function deleteImg(url) {
+    if (url === '') return;
+    fs.unlink(url, (err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+};
+
 
 module.exports = {
     registerUser,

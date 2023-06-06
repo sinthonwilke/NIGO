@@ -98,6 +98,7 @@ a {
     background-color: rgb(30, 30, 30);
     transition: right 0.3s ease-in-out;
     z-index: 999;
+    overflow: auto;
 }
 
 .menu.open {
@@ -113,10 +114,6 @@ a {
 
 .menuList li {
     padding: 8px;
-}
-
-.menuList li:nth-of-type(5) {
-    margin-top: 16px;
 }
 
 .menuList li a {
