@@ -74,6 +74,7 @@ function ProfilePage() {
             const imageURL = URL.createObjectURL(file);
             setImageSrc(imageURL);
             displayErrorMessage('Profile image updated.');
+            window.location.reload();
         } catch (error) {
             displayErrorMessage('Error updating profile image.', true);
         }
@@ -87,6 +88,7 @@ function ProfilePage() {
             const res = await axios.put(updateUserUrl, { username: userNameInput }, authConfig);
             setUserName(userNameInput);
             displayErrorMessage('User name updated.');
+            window.location.reload();
         } catch (error) {
             displayErrorMessage('Username already exists.', true);
         }
@@ -98,9 +100,9 @@ function ProfilePage() {
         if (bioInput === bio) return;
 
         try {
+            await axios.put(updateUserUrl, { bio: bioInput }, authConfig);
             setBio(bioInput);
             displayErrorMessage('Bio updated.')
-            await axios.put(updateUserUrl, { bio: bioInput }, authConfig);
         } catch (error) {
             displayErrorMessage(error);
         }
