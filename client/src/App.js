@@ -10,6 +10,7 @@ import logout from './services/logout';
 import './App.css';
 import Layout from './layout/layout';
 import ProfilePage from './pages/ProfilePage';
+import Request from './pages/RequestPage';
 
 function App() {
     const isAuth = isAuthenticated();
@@ -18,12 +19,13 @@ function App() {
             {isAuth ? (
                 <Layout>
                     <Routes>
+                        <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/" element={<HomePage />} />
                         <Route path="/game" element={<GamePage />} />
                         <Route path="/wishlist" element={<WishListPage />} />
                         <Route path="/favorite" element={<Favorite />} />
+                        <Route path="/request" element={<Request />} />
                         <Route path="/logout" Component={logout} />
-                        <Route path="/profile" element={<ProfilePage />} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
                 </Layout>
