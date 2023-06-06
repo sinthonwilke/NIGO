@@ -3,6 +3,7 @@ const router = express.Router();
 const { uploadImg } = require('../middleware/storage');
 const {
     getGames,
+    searchGames,
     getGame,
     createGame,
     updateGame,
@@ -11,6 +12,7 @@ const {
 
 
 router.get('/', getGames);
+router.get('/search/:reqId', searchGames);
 router.post('/', uploadImg, createGame);
 router.get('/:reqId', getGame);
 router.put('/:reqId', uploadImg, updateGame);

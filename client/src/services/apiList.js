@@ -10,6 +10,7 @@ export const updateUserUrl = api + 'user/update/';
 
 // Games
 export const gameListUrl = api + 'game/';
+export const searchGameUrl = api + 'game/search/';
 
 // Favorites
 export const favGamesUrl = api + 'fav/games/';

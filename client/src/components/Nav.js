@@ -48,6 +48,11 @@ function Nav() {
         setSearchValue(event.target.value);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        window.location.href = `/game?search=${searchValue}`;
+    };
+
     useEffect(() => {
         const savedSearchValue = localStorage.getItem('searchValue');
         if (savedSearchValue) {
@@ -76,7 +81,7 @@ function Nav() {
                 </div>
 
                 <div className={styles.navMid}>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
                             type="text"
                             placeholder="Search games..."

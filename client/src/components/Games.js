@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from '../styles/Games.module.css';
 import { AiOutlineHeart, AiFillCloseSquare, AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
@@ -41,9 +42,10 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false, o
         } else {
             setLike(true);
         }
+
+
         loadImage();
         document.addEventListener('mousedown', handleClickOutside);
-
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };

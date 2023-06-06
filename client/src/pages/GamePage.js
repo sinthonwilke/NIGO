@@ -1,8 +1,9 @@
 import Games from '../components/Games';
 import gStyles from '../styles/global.module.css';
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { gameListUrl, favUrl, collectionUrl } from '../services/apiList';
+import { gameListUrl, favUrl, collectionUrl, searchGameUrl } from '../services/apiList';
 import styles from '../styles/GamePage.module.css';
 import authConfig from '../services/authConfig';
 import PopCollection from '../components/PopCollection';
@@ -15,11 +16,21 @@ function GamePage() {
     const [collectionList, setCollectionList] = useState([]);
     const [gameId, setGameId] = useState(null);
     const [isPopCollectionVisible, setPopCollectionVisible] = useState(false);
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const searchValue = searchParams.get('search');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const gameListResponse = await axios.get(gameListUrl);
+
+                let getThisUrl = gameListUrl;
+
+                if (searchValue) {
+                    getThisUrl = searchGameUrl + searchValue;
+                }
+
+                const gameListResponse = await axios.get(getThisUrl);
                 const updatedGameList = gameListResponse.data.map((gameList, index) => ({
                     ...gameList,
                     id: index + 1
@@ -44,8 +55,9 @@ function GamePage() {
                 console.error('Error fetching data:', error);
             }
         };
+
         fetchData();
-    }, []);
+    }, [searchValue]);
 
     const handleChildSignal = (gameId) => {
         setGameId(gameId);

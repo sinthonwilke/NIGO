@@ -13,6 +13,16 @@ const getGame = asyncHandler(async (req, res) => {
     res.status(200).json(game);
 });
 
+const searchGames = asyncHandler(async (req, res) => {
+    const searchValue = req.params.reqId;
+    const games = await gameSchema.find({
+        $or: [
+            { title: { $regex: searchValue, $options: 'i' } },
+        ]
+    }).sort({ createdAt: -1 });
+    res.status(200).send(games);
+});
+
 const createGame = asyncHandler(async (req, res) => {
     const { title, releaseDate, description, platform, link, tags } = req.body;
     const newGame = await gameSchema.create({
@@ -68,6 +78,7 @@ function deleteImg(url) {
 
 module.exports = {
     getGames,
+    searchGames,
     getGame,
     createGame,
     updateGame,
