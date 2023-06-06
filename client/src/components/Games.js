@@ -43,7 +43,6 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false, o
             setLike(true);
         }
 
-
         loadImage();
         document.addEventListener('mousedown', handleClickOutside);
         return () => {

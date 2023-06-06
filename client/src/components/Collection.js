@@ -11,7 +11,7 @@ import Games from '../components/Games';
 import loadStyle from '../styles/Loading.module.css';
 import Loading from './Loading';
 
-function Collection(collection, isChildLoading) {
+function Collection(collection) {
     const [gameList, setGameList] = useState([]);
     const [favList, setFavList] = useState([]);
     const [textValue, setTextValue] = useState(collection.collection.name);
@@ -19,7 +19,6 @@ function Collection(collection, isChildLoading) {
     const [isRenaming, setIsRenaming] = useState(false);
     const [updatedTextValue, setUpdatedTextValue] = useState(textValue);
     const [isLoading, setIsLoading] = useState(true);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,17 +37,12 @@ function Collection(collection, isChildLoading) {
                 setFavList(updatedFavList);
 
                 setIsLoading(false);
-                childLoading();
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
     }, []);
-
-    const childLoading = () => {
-        isChildLoading(true);
-    };
 
     const handleViewMore = () => {
         setShowMore(!showMore);
