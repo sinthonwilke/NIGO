@@ -3,9 +3,9 @@ import Collection from '../components/Collection';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { collectionUrl } from '../services/apiList';
-import loadStyle from '../styles/Loading.module.css';
 import authConfig from '../services/authConfig';
 import gStyles from '../styles/global.module.css';
+import Loading from '../components/Loading';
 
 function WishListPage() {
     const [collectionList, setCollectionList] = useState([]);
@@ -38,15 +38,7 @@ function WishListPage() {
             <>
                 <h1 className={gStyles.head}>WishList</h1>
                 <CreateCollection />
-                <div className={loadStyle.loadBody}>
-                    <div className={loadStyle.loading}>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                    </div>
-                </div>
+                <Loading />
             </>
         )
     } else {

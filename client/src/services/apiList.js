@@ -1,18 +1,20 @@
-const url = 'http://localhost:3000/api/';
+export const url = 'http://localhost:3000/';
+export const api = url + 'api/';
 
 // User
-export const loginUrl = url + 'user/login/';
-export const logoutUrl = url + 'user/logout/';
-export const registerUrl = url + 'user/register/';
+export const loginUrl = api + 'user/login/';
+export const logoutUrl = api + 'user/logout/';
+export const registerUrl = api + 'user/register/';
+export const userUrl = api + 'user/';
 
 // Games
-export const gameListUrl = url + 'game/';
+export const gameListUrl = api + 'game/';
 
 // Favorites
-export const favGamesUrl = url + 'fav/games/';
-export const favUrl = url + 'fav/';
+export const favGamesUrl = api + 'fav/games/';
+export const favUrl = api + 'fav/';
 
 // Collections
-export const collectionUrl = url + 'collection/';
-export const collectionGamesUrl = url + 'collection/game/';
+export const collectionUrl = api + 'collection/';
+export const collectionGamesUrl = api + 'collection/game/';
 

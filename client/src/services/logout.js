@@ -6,8 +6,7 @@ const logout = (navigate) => {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
         .then(response => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('searchValue');
+            localStorage.clear();
             window.location.href = '/login';
         })
         .catch(error => {

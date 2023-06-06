@@ -9,6 +9,7 @@ import axios from 'axios';
 import { collectionGamesUrl, favUrl } from '../services/apiList';
 import Games from '../components/Games';
 import loadStyle from '../styles/Loading.module.css';
+import Loading from './Loading';
 
 function Collection(collection, isChildLoading) {
     const [gameList, setGameList] = useState([]);
@@ -76,17 +77,7 @@ function Collection(collection, isChildLoading) {
 
     if (isLoading) {
         return (
-            <>
-                <div className={loadStyle.loadBody}>
-                    <div className={loadStyle.loading}>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                    </div>
-                </div>
-            </>
+            <Loading />
         )
     } else {
         return (

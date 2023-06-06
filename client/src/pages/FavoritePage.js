@@ -4,18 +4,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { favGamesUrl, collectionUrl } from '../services/apiList';
 import styles from '../styles/GamePage.module.css';
-import loadStyle from '../styles/Loading.module.css';
 import authConfig from '../services/authConfig';
 import PopCollection from '../components/PopCollection';
-
+import Loading from '../components/Loading';
 
 function FavoritePage() {
     const [gameList, setGameList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [collectionList, setCollectionList] = useState([]);
-    const [isPopCollection, setIsPopCollection] = useState(false);
     const [gameId, setGameId] = useState(null);
-    const [isMessageReceived, setIsMessageReceived] = useState(false);
     const [isPopCollectionVisible, setPopCollectionVisible] = useState(false);
 
     useEffect(() => {
@@ -44,7 +41,6 @@ function FavoritePage() {
     }, []);
 
     const handleChildSignal = (gameId) => {
-        setIsMessageReceived(true);
         setGameId(gameId);
         setPopCollectionVisible(!isPopCollectionVisible);
     };
@@ -57,15 +53,7 @@ function FavoritePage() {
         return (
             <>
                 <h1 className={gStyles.head}>Favorite</h1>
-                <div className={loadStyle.loadBody}>
-                    <div className={loadStyle.loading}>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                        <div className={loadStyle.dot}></div>
-                    </div>
-                </div>
+                <Loading />
             </>
         )
     } else {

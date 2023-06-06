@@ -13,10 +13,9 @@ import ProfilePage from './pages/ProfilePage';
 
 function App() {
     const isAuth = isAuthenticated();
-
     return (
         <BrowserRouter>
-            {isAuth ? ( // Check if the user is authenticated
+            {isAuth ? (
                 <Layout>
                     <Routes>
                         <Route path="/" element={<HomePage />} />

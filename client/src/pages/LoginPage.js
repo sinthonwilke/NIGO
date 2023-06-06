@@ -3,10 +3,10 @@ import gStyles from '../styles/global.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo/logo.png';
-
 import { useState } from 'react';
 import axios from 'axios';
-import { loginUrl } from '../services/apiList';
+import { loginUrl, userUrl, url } from '../services/apiList';
+import authConfig from '../services/authConfig';
 
 const LoginPage = () => {
     const [message, setMessage] = useState('');
@@ -44,8 +44,8 @@ const LoginPage = () => {
         };
 
         try {
-            const res = await axios.post(loginUrl, loginData);
-            localStorage.setItem('token', res.data.accessToken);
+            const userRes = await axios.post(loginUrl, loginData);
+            localStorage.setItem('token', userRes.data.accessToken);
             window.location.href = '/';
         } catch (error) {
             handleMessageText(error.response.data.message);

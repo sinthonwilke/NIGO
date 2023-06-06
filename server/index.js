@@ -28,5 +28,9 @@ app.use('/assets/img/:imgName', (req, res) => {
     const imgName = req.params.imgName;
     res.sendFile(imgName, { root: './assets/img' });
 });
+app.use('/assets/userImg/:imgName', (req, res) => {
+    const imgName = req.params.imgName;
+    res.sendFile(imgName, { root: './assets/userImg' });
+});
 
 app.use(errorhandler);

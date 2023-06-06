@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Games.module.css';
 import { AiOutlineHeart, AiFillCloseSquare, AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
-import { favUrl, collectionGamesUrl } from '../services/apiList';
+import { favUrl, collectionGamesUrl, url } from '../services/apiList';
 import authConfig from '../services/authConfig';
 
 function Games({ game, favList = [], fromFavPage = false, fromColPage = false, onSignal }) {
@@ -21,7 +21,7 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false, o
 
         const loadImage = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/' + game.imgUrl, { responseType: 'blob' });
+                const response = await axios.get(url + game.imgUrl, { responseType: 'blob' });
                 const imageURL = URL.createObjectURL(response.data);
                 setImageSrc(imageURL);
                 setIsLoading(false);

@@ -61,10 +61,12 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const currentUser = asyncHandler(async (req, res) => {
-    res.status(200).json({
-        UserID: req.user,
-        UserToken: req.token
-    });
+    const currentUser = await user.findById(req.user).select({ bio: 1, profilePicture: 1, username: 1 });
+    res.status(200).json(currentUser);
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+    res.status(200).send('User updated.');
 });
 
 module.exports = {
@@ -72,4 +74,5 @@ module.exports = {
     loginUser,
     logoutUser,
     currentUser,
+    updateUser
 };
