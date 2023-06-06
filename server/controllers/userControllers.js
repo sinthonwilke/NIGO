@@ -72,25 +72,22 @@ const updateUser = asyncHandler(async (req, res) => {
         username: username,
         bio: bio,
     };
-
-    console.log(req.file.path);
-
     const usernameExist = await user.findOne({ username });
 
     if (usernameExist) {
         res.status(400).send('Username already exists.');
-    }
-
-    if (req.file) {
-        const oldProfilePicture = await user.findById(req.user);
-        if (oldProfilePicture.profilePicture !== 'assets/userImg/default.jpg') {
-            deleteImg(oldProfilePicture.profilePicture);
+    } else {
+        if (req.file) {
+            const oldProfilePicture = await user.findById(req.user);
+            console.log(oldProfilePicture.profilePicture);
+            if (oldProfilePicture.profilePicture !== 'assets/userImg/default.jpg') {
+                deleteImg(oldProfilePicture.profilePicture);
+            }
             updatedFields.profilePicture = req.file.path;
         }
+        await user.findByIdAndUpdate(req.user, updatedFields);
+        res.status(200).send('User updated.');
     }
-
-    await user.findByIdAndUpdate(req.user, updatedFields);
-    res.status(200).send('User updated.');
 });
 
 function deleteImg(url) {
