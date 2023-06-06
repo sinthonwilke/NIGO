@@ -5,6 +5,7 @@ import axios from 'axios';
 import { collectionUrl } from '../services/apiList';
 import loadStyle from '../styles/Loading.module.css';
 import authConfig from '../services/authConfig';
+import gStyles from '../styles/global.module.css';
 
 function WishListPage() {
     const [collectionList, setCollectionList] = useState([]);
@@ -35,6 +36,7 @@ function WishListPage() {
     if (isLoading || isChildLoading) {
         return (
             <>
+                <h1 className={gStyles.head}>WishList</h1>
                 <CreateCollection />
                 <div className={loadStyle.loadBody}>
                     <div className={loadStyle.loading}>
@@ -50,6 +52,7 @@ function WishListPage() {
     } else {
         return (
             <>
+                <h1 className={gStyles.head}>WishList</h1>
                 <CreateCollection />
                 {collectionList.map(collection => (
                     <div className='{styles.item}' key={collection._id}>
