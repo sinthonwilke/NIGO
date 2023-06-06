@@ -63,6 +63,9 @@ function Nav() {
                 <div className={`${styles.menu} ${menuOpen ? styles.open : ''}`}>
                     <ul className={styles.menuList}>
                         <li>
+                            <Link to="/profile">Profile</Link>
+                        </li>
+                        <li>
                             <Link to="/">Home</Link>
                         </li>
                         <li>

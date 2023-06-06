@@ -62,6 +62,7 @@ function GamePage() {
     if (isLoading) {
         return (
             <>
+                <h1 className={gStyles.head}>Games</h1>
                 <div className={loadStyle.loadBody}>
                     <div className={loadStyle.loading}>
                         <div className={loadStyle.dot}></div>

@@ -56,6 +56,7 @@ function FavoritePage() {
     if (isLoading) {
         return (
             <>
+                <h1 className={gStyles.head}>Favorite</h1>
                 <div className={loadStyle.loadBody}>
                     <div className={loadStyle.loading}>
                         <div className={loadStyle.dot}></div>

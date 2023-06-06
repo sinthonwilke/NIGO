@@ -10,7 +10,7 @@ import { collectionGamesUrl, favUrl } from '../services/apiList';
 import Games from '../components/Games';
 import loadStyle from '../styles/Loading.module.css';
 
-function Collection(collection) {
+function Collection(collection, isChildLoading) {
     const [gameList, setGameList] = useState([]);
     const [favList, setFavList] = useState([]);
     const [textValue, setTextValue] = useState(collection.collection.name);
@@ -37,12 +37,17 @@ function Collection(collection) {
                 setFavList(updatedFavList);
 
                 setIsLoading(false);
+                childLoading();
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
     }, []);
+
+    const childLoading = () => {
+        isChildLoading(true);
+    };
 
     const handleViewMore = () => {
         setShowMore(!showMore);

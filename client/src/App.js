@@ -9,6 +9,7 @@ import isAuthenticated from './services/isAuthenticated';
 import logout from './services/logout';
 import './App.css';
 import Layout from './layout/layout';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
     const isAuth = isAuthenticated();
@@ -23,6 +24,7 @@ function App() {
                         <Route path="/wishlist" element={<WishListPage />} />
                         <Route path="/favorite" element={<Favorite />} />
                         <Route path="/logout" Component={logout} />
+                        <Route path="/profile" element={<ProfilePage />} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
                 </Layout>

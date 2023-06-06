@@ -9,6 +9,7 @@ import authConfig from '../services/authConfig';
 function WishListPage() {
     const [collectionList, setCollectionList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isChildLoading, setIsChildLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,9 +28,14 @@ function WishListPage() {
         fetchData();
     }, []);
 
-    if (isLoading) {
+    const handleChildSignal = () => {
+        setIsChildLoading(true);
+    };
+
+    if (isLoading || isChildLoading) {
         return (
             <>
+                <CreateCollection />
                 <div className={loadStyle.loadBody}>
                     <div className={loadStyle.loading}>
                         <div className={loadStyle.dot}></div>
@@ -47,7 +53,7 @@ function WishListPage() {
                 <CreateCollection />
                 {collectionList.map(collection => (
                     <div className='{styles.item}' key={collection._id}>
-                        <Collection collection={collection} />
+                        <Collection collection={collection} isChildLoading={handleChildSignal} />
                     </div>
                 ))}
             </>
