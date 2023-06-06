@@ -3,11 +3,42 @@ import { useLocation, Link } from 'react-router-dom';
 import styles from '../styles/Nav.module.css';
 import logo from '../assets/logo/logo.png';
 import { BiMenu } from 'react-icons/bi';
+import { FaHome } from 'react-icons/fa';
+import { RiAccountCircleFill, RiGamepadFill } from 'react-icons/ri';
+import { IoMdListBox } from 'react-icons/io';
+import { AiFillHeart } from 'react-icons/ai';
+import { CgLogOut } from 'react-icons/cg';
+import { VscGitPullRequestGoToChanges } from 'react-icons/vsc';
+import axios from 'axios';
+import { userUrl, url } from '../services/apiList';
+import authConfig from '../services/authConfig';
+
 
 function Nav() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const location = useLocation();
+    const [userName, setUserName] = useState('');
+    const [imageSrc, setImageSrc] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userRes = await axios.get(userUrl, authConfig);
+                const userDetail = userRes.data;
+
+                const imgRes = await axios.get(url + userDetail.profilePicture, { responseType: 'blob' });
+                const imageURL = URL.createObjectURL(imgRes.data);
+
+                setUserName(userDetail.username);
+                setImageSrc(imageURL);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -30,6 +61,7 @@ function Nav() {
 
     useEffect(() => {
     }, [location]);
+
 
     return (
         <>
@@ -62,22 +94,39 @@ function Nav() {
 
                 <div className={`${styles.menu} ${menuOpen ? styles.open : ''}`}>
                     <ul className={styles.menuList}>
+                        <Link to="/profile" className={styles.profileContainer}>
+                            <img src={imageSrc} alt="profile" className={styles.profileImg} />
+                            <p className={styles.profileName}>{userName}</p>
+                        </Link>
+                        <br />
                         <li>
+                            <RiAccountCircleFill />
                             <Link to="/profile">Profile</Link>
                         </li>
                         <li>
+                            <FaHome />
                             <Link to="/">Home</Link>
                         </li>
                         <li>
+                            <RiGamepadFill />
                             <Link to="/game">Games</Link>
                         </li>
                         <li>
+                            <IoMdListBox />
                             <Link to="/wishlist">Wish List</Link>
                         </li>
                         <li>
+                            <AiFillHeart />
                             <Link to="/favorite">Favorite</Link>
                         </li>
+                        <br />
                         <li>
+                            <VscGitPullRequestGoToChanges />
+                            <Link to="/request">Request</Link>
+                        </li>
+                        <br />
+                        <li>
+                            <CgLogOut />
                             <Link to="/logout">Logout</Link>
                         </li>
                     </ul>
@@ -88,5 +137,6 @@ function Nav() {
         </>
     );
 }
+
 
 export default Nav;

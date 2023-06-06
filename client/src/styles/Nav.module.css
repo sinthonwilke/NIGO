@@ -91,6 +91,7 @@ a {
     display: block;
     position: fixed;
     border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
     top: 80px;
     right: -250px;
     bottom: 0;
@@ -113,6 +114,9 @@ a {
 }
 
 .menuList li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     padding: 8px;
 }
 
@@ -122,8 +126,6 @@ a {
     text-decoration: none;
     font-size: 18px;
 }
-
-/* responsive for navigator bar */
 
 @media screen and (max-width: 768px) {
 
@@ -144,6 +146,28 @@ a {
         padding: 6px 9px 6px 0;
         background-color: transparent;
     }
+}
+
+.profileContainer {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: -24px;
+}
+
+.profileImg {
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profileName {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 @media screen and (min-width: 1980px) {
