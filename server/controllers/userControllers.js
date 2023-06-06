@@ -79,7 +79,6 @@ const updateUser = asyncHandler(async (req, res) => {
     } else {
         if (req.file) {
             const oldProfilePicture = await user.findById(req.user);
-            console.log(oldProfilePicture.profilePicture);
             if (oldProfilePicture.profilePicture !== 'assets/userImg/default.jpg') {
                 deleteImg(oldProfilePicture.profilePicture);
             }
