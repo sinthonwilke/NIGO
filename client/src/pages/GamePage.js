@@ -10,11 +10,35 @@ import PopCollection from '../components/PopCollection';
 import Loading from '../components/Loading';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
 
-import Chip from '../UI/Chip';
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const names = [
+    'Oliver Hansen',
+    'Van Henry',
+    'April Tucker',
+    'Ralph Hubbard',
+    'Omar Alexander',
+    'Carlos Abbott',
+    'Miriam Wagner',
+    'Bradley Wilkerson',
+    'Virginia Andrews',
+    'Kelly Snyder',
+];
 
 function GamePage() {
     const [gameList, setGameList] = useState([]);
@@ -28,6 +52,12 @@ function GamePage() {
     const searchValue = searchParams.get('search');
     const [message, setMessage] = useState('');
     const [showMessageEffect, setShowMessageEffect] = useState(false);
+    const [year, setYear] = useState('');
+    const [platform, setPlatform] = useState('');
+    const [genres, setGenres] = useState([]);
+    const [personName, setPersonName] = React.useState([]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+
 
 
     useEffect(() => {
@@ -102,10 +132,6 @@ function GamePage() {
             , 1);
     };
 
-    const [year, setYear] = useState('');
-    const [platform, setPlatform] = useState('');
-    const [genres, setGenres] = useState([]);
-
     const handleYearChange = (event) => {
         setYear(event.target.value);
     };
@@ -115,10 +141,9 @@ function GamePage() {
     };
 
     const handleGenreChange = (event) => {
-        const selectedGenres = Array.from(event.target.form.elements.genres)
-            .filter((checkbox) => checkbox.checked)
-            .map((checkbox) => checkbox.value);
-        setGenres(selectedGenres);
+        const { value } = event.target;
+        setSelectedGenres(value);
+        setGenres(value);
     };
 
     const handleSubmit = (event) => {
@@ -127,7 +152,6 @@ function GamePage() {
         console.log('Platform:', platform);
         console.log('Genres:', genres);
     };
-
 
     if (isLoading) {
         return (
@@ -148,9 +172,10 @@ function GamePage() {
                             <Box sx={{ minWidth: 120 }} >
                                 <FormControl fullWidth >
                                     <InputLabel sx={{ color: 'white' }} >Year</InputLabel>
-                                    <Select style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
+                                    <Select
                                         value={year}
                                         onChange={handleYearChange}
+                                        style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
                                         sx={{
                                             color: 'white', // text color
                                             '& .MuiSelect-icon': {
@@ -171,13 +196,14 @@ function GamePage() {
                             <Box sx={{ minWidth: 120 }} >
                                 <FormControl fullWidth >
                                     <InputLabel sx={{ color: 'white' }} >Platform</InputLabel>
-                                    <Select style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
+                                    <Select
                                         value={platform}
                                         onChange={handlePlatformChange}
+                                        style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
                                         sx={{
-                                            color: 'white', // text color
+                                            color: 'white',
                                             '& .MuiSelect-icon': {
-                                                color: 'white' // icon color
+                                                color: 'white'
                                             }
                                         }}
                                     >
@@ -189,7 +215,30 @@ function GamePage() {
                         </div>
 
                         <div className={styles.filter3}>
-                            <Chip />
+                            <FormControl sx={{ m: 1, width: 120 }}>
+                                <InputLabel sx={{ color: 'white' }}>Tags</InputLabel>
+                                <Select
+                                    multiple
+                                    value={selectedGenres}
+                                    onChange={handleGenreChange}
+                                    renderValue={(selected) => selected.join(', ')}
+                                    MenuProps={MenuProps}
+                                    style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
+                                    sx={{
+                                        color: 'white',
+                                        '& .MuiSelect-icon': {
+                                            color: 'white'
+                                        }
+                                    }}
+                                >
+                                    {names.map((name) => (
+                                        <MenuItem key={name} value={name}>
+                                            <Checkbox checked={selectedGenres.indexOf(name) > -1} />
+                                            <ListItemText primary={name} />
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </div>
 
                         <div className={styles.filter4}>
