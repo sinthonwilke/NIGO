@@ -27,16 +27,17 @@ function GamePage() {
         const fetchData = async () => {
             try {
 
-                let getThisUrl = '';
+                let getThisUrl = gameListUrl;
+                let showMsg = true;
 
                 if (searchValue) {
                     getThisUrl = searchGameUrl + searchValue;
                 }
                 else if (searchValue == '') {
                     getThisUrl = gameListUrl;
+                    showMsg = false;
                 }
 
-                console.log(getThisUrl);
                 const gameListResponse = await axios.get(getThisUrl);
                 const updatedGameList = gameListResponse.data.map((gameList, index) => ({
                     ...gameList,
@@ -59,11 +60,11 @@ function GamePage() {
 
                 setIsLoading(false);
 
-                if (updatedGameList.length > 0) {
+                if (updatedGameList.length > 0 && showMsg == true) {
                     setMessage(`Search result for "${searchValue}"`);
                     setShowMessageEffect(true);
 
-                } else {
+                } else if (updatedGameList.length <= 0 && showMsg == true) {
                     setMessage(`No search result for "${searchValue}"`);
                     setShowMessageEffect(true);
                 }
