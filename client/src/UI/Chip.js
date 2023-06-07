@@ -39,14 +39,13 @@ export default function MultipleSelectCheckmarks() {
             target: { value },
         } = event;
         setPersonName(
-            // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
     };
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: 120 }}>
                 <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
