@@ -45,7 +45,7 @@ const loginUser = asyncHandler(async (req, res) => {
             token: accessToken,
             user: loginUser._id,
         });
-        res.status(200).json({ accessToken });
+        res.status(200).json({ accessToken, role: loginUser.role });
     } else {
         res.status(400);
         throw new Error('Invalid Email or Password.');

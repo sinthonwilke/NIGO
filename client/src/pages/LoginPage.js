@@ -46,6 +46,7 @@ const LoginPage = () => {
         try {
             const userRes = await axios.post(loginUrl, loginData);
             localStorage.setItem('token', userRes.data.accessToken);
+            localStorage.setItem('role', userRes.data.role);
             window.location.href = '/';
         } catch (error) {
             handleMessageText(error.response.data.message);

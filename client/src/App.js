@@ -6,6 +6,7 @@ import WishListPage from './pages/WishListPage';
 import Favorite from './pages/FavoritePage';
 import RegisterPage from './pages/RegisterPage';
 import isAuthenticated from './services/isAuthenticated';
+import isRoleAdmin from './services/isRoleAdmin';
 import logout from './services/logout';
 import './App.css';
 import Layout from './layout/layout';
@@ -14,6 +15,8 @@ import FeedbackPage from './pages/FeedbackPage';
 
 function App() {
     const isAuth = isAuthenticated();
+    const isAdmin = isRoleAdmin();
+
     return (
         <BrowserRouter>
             {isAuth ? (
