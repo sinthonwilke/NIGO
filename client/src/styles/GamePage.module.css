@@ -10,3 +10,10 @@
 .item {
     margin: auto;
 }
+
+.message {
+    font-size: 16px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 24px;
+}

@@ -19,6 +19,9 @@ function GamePage() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const searchValue = searchParams.get('search');
+    const [message, setMessage] = useState('');
+    const [showMessageEffect, setShowMessageEffect] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,6 +54,14 @@ function GamePage() {
                 setCollectionList(updatedCollectionList);
 
                 setIsLoading(false);
+                if (searchValue && updatedGameList.length > 0) {
+                    setMessage(`Search result for "${searchValue}"`);
+                    setShowMessageEffect(true);
+                } else {
+                    setMessage(`No search result for "${searchValue}"`);
+                    setShowMessageEffect(true);
+                }
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -68,6 +79,15 @@ function GamePage() {
         setPopCollectionVisible(false);
     };
 
+    const handleMessageText = (msg) => {
+        setMessage(msg);
+        setShowMessageEffect(false);
+        setTimeout(() => {
+            setShowMessageEffect(true);
+        }
+            , 1);
+    };
+
     if (isLoading) {
         return (
             <>
@@ -80,6 +100,7 @@ function GamePage() {
         return (
             <>
                 <h1 className={gStyles.head}>Games</h1>
+                <h5 className={`${styles.message} ${showMessageEffect ? styles.effect : ''}`}>{message}</h5>
                 <div className={styles.gameContainer}>
                     {gameList.map(game => (
                         <div className={styles.item} key={game._id}>
