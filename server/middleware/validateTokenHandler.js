@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const tokenSchema = require('../models/tokenModel');
 
-const validateTokenHandler = asyncHandler(async (req, res, next) => {
+const validateTokenHandler = (requiredRole = 'user') => asyncHandler(async (req, res, next) => {
     let token;
     let authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer')) {
@@ -21,6 +21,12 @@ const validateTokenHandler = asyncHandler(async (req, res, next) => {
             req.user = decoded.id;
             req.userEmail = decoded.email;
             req.token = token;
+
+            if (decoded.role !== 'admin' && decoded.role !== requiredRole) {
+                res.status(403);
+                throw new Error(`Not authorized, ${requiredRole} access required.`);
+            }
+
             next();
         });
         if (!token) {

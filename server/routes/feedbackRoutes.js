@@ -7,6 +7,6 @@ const {
 } = require('../controllers/feedbackControllers');
 
 router.get('/', getAllFeedbacks);
-router.post('/', validateTokenHandler, createFeedback);
+router.post('/', validateTokenHandler('admin'), createFeedback);
 
 module.exports = router;

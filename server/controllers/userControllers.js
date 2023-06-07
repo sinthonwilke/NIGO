@@ -34,16 +34,16 @@ const loginUser = asyncHandler(async (req, res) => {
             {
                 id: loginUser._id,
                 email: loginUser.email,
+                role: loginUser.role,
             },
             process.env.ACESS_TOKEN_SECRET,
             {
                 expiresIn: '30D'
             }
         );
-        const token = await tokenSchema.create({
+        await tokenSchema.create({
             token: accessToken,
             user: loginUser._id,
-            userEmail: loginUser.email,
         });
         res.status(200).json({ accessToken });
     } else {
