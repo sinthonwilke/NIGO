@@ -8,6 +8,13 @@ import styles from '../styles/GamePage.module.css';
 import authConfig from '../services/authConfig';
 import PopCollection from '../components/PopCollection';
 import Loading from '../components/Loading';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+import Chip from '../UI/Chip';
 
 function GamePage() {
     const [gameList, setGameList] = useState([]);
@@ -121,6 +128,7 @@ function GamePage() {
         console.log('Genres:', genres);
     };
 
+
     if (isLoading) {
         return (
             <>
@@ -136,35 +144,55 @@ function GamePage() {
 
                 <div>
                     <form onSubmit={handleSubmit} className={styles.filterContainer}>
-                        <div>
-                            <p>Year:</p>
-                            <select id="year-select">
-                                <option value="">Select a year</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                            </select>
+                        <div className={styles.filter1}>
+                            <Box sx={{ minWidth: 120 }} >
+                                <FormControl fullWidth >
+                                    <InputLabel sx={{ color: 'white' }} >Year</InputLabel>
+                                    <Select style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
+                                        value={year}
+                                        onChange={handleYearChange}
+                                        sx={{
+                                            color: 'white', // text color
+                                            '& .MuiSelect-icon': {
+                                                color: 'white' // icon color
+                                            }
+                                        }}
+                                    >
+                                        <MenuItem value={"2023"}>2023</MenuItem>
+                                        <MenuItem value={"2022"}>2022</MenuItem>
+                                        <MenuItem value={"2021"}>2021</MenuItem>
+                                        <MenuItem value={"2020"}>2020</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
                         </div>
 
-                        <div className={styles.radioContainer}>
-                            <p>Platform:</p>
-                            <select id="platform-select">
-                                <option value="">Select a platform</option>
-                                <option value="PC">PC</option>
-                                <option value="Xbox">Xbox</option>
-                            </select>
+                        <div className={styles.filter2}>
+                            <Box sx={{ minWidth: 120 }} >
+                                <FormControl fullWidth >
+                                    <InputLabel sx={{ color: 'white' }} >Platform</InputLabel>
+                                    <Select style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
+                                        value={platform}
+                                        onChange={handlePlatformChange}
+                                        sx={{
+                                            color: 'white', // text color
+                                            '& .MuiSelect-icon': {
+                                                color: 'white' // icon color
+                                            }
+                                        }}
+                                    >
+                                        <MenuItem value={"Steam"}>Steam</MenuItem>
+                                        <MenuItem value={"Xbox"}>Xbox</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
                         </div>
 
-                        <div>
-                            <p>Genres:</p>
-                            <select id="genre-select" multiple>
-                                <option value="RPG">RPG</option>
-                                <option value="Open world">Open world</option>
-                                <option value="Shoot">Shoot</option>
-                            </select>
+                        <div className={styles.filter3}>
+                            <Chip />
                         </div>
 
-                        <div>
+                        <div className={styles.filter4}>
                             <button type="submit" className={styles.btn}>Filter</button>
                         </div>
                     </form>
