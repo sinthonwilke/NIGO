@@ -1,5 +1,7 @@
 .container {
-    margin: 0 32px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: auto;
 }
 
 table {

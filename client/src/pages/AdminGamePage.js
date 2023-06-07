@@ -66,6 +66,7 @@ function AdminGamePage() {
                                         <td>
                                             <button className={styles.btn}>Edit</button>
                                             <button className={styles.btn}>Image</button>
+                                            <button className={styles.btn}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}
