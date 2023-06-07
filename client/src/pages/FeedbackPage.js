@@ -1,6 +1,9 @@
 import gStyles from '../styles/global.module.css';
 import styles from '../styles/FeedbackPage.module.css';
 import { useState } from 'react';
+import axios from 'axios';
+import { feedbackUrl } from '../services/apiList';
+import authConfig from '../services/authConfig';
 
 function FeedbackPage() {
     const [message, setMessage] = useState('');
@@ -21,7 +24,7 @@ function FeedbackPage() {
         }, 0);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const feedbackData = {
             subject: subject,
@@ -29,12 +32,16 @@ function FeedbackPage() {
             link: link,
         };
 
-        console.log(feedbackData);
+        try {
+            await axios.post(feedbackUrl, feedbackData, authConfig);
+            handleMessageText('Feedback sent. Thank you for your feedback!');
+            setSubject('');
+            setDetails('');
+            setLink('');
 
-        handleMessageText('Feedback sent. Thank you for your feedback!');
-        setSubject('');
-        setDetails('');
-        setLink('');
+        } catch (error) {
+            handleMessageText(error.response.data);
+        }
     };
 
     return (
@@ -68,7 +75,7 @@ function FeedbackPage() {
                         value={link}
                         onChange={(e) => setLink(e.target.value)}
                     />
-                    <button type='submit'>Submit</button>
+                    <button type='submit' className={styles.btnbutton}>Submit</button>
                 </form>
             </div>
         </>

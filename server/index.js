@@ -24,6 +24,7 @@ app.use('/api/user', require('./routes/userRoutes.js'));
 app.use('/api/fav', require('./routes/favRoutes.js'));
 app.use('/api/game', require('./routes/gameRoutes.js'));
 app.use('/api/collection', require('./routes/collectionRoutes.js'));
+app.use('/api/feedback', require('./routes/feedbackRoutes.js'));
 app.use('/assets/img/:imgName', (req, res) => {
     const imgName = req.params.imgName;
     res.sendFile(imgName, { root: './assets/img' });

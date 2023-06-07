@@ -28,8 +28,9 @@ function CreateCollection() {
                     value={inputValue}
                     onChange={handleChange}
                     placeholder='Add new collection here...'
+                    required
                 />
-                <button type="submit"><BiAddToQueue className={style.icon} /></button>
+                <button type="submit" className={style.button}><BiAddToQueue className={style.ico} /></button>
             </form>
             <div style={{ marginBottom: '32px' }} ></div>
         </>

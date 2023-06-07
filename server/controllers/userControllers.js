@@ -33,6 +33,7 @@ const loginUser = asyncHandler(async (req, res) => {
         const accessToken = jwt.sign(
             {
                 id: loginUser._id,
+                email: loginUser.email,
             },
             process.env.ACESS_TOKEN_SECRET,
             {
@@ -42,6 +43,7 @@ const loginUser = asyncHandler(async (req, res) => {
         const token = await tokenSchema.create({
             token: accessToken,
             user: loginUser._id,
+            userEmail: loginUser.email,
         });
         res.status(200).json({ accessToken });
     } else {

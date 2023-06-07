@@ -19,6 +19,7 @@ const validateTokenHandler = asyncHandler(async (req, res, next) => {
                 throw new Error('Not authorized, token failed.');
             }
             req.user = decoded.id;
+            req.userEmail = decoded.email;
             req.token = token;
             next();
         });

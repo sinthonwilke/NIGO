@@ -30,7 +30,7 @@
     font-size: 14px;
 }
 
-.form button {
+.form .button {
     position: absolute;
     height: 100%;
     background-color: transparent;
@@ -40,20 +40,19 @@
     border-radius: 20px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
     transition: padding 0.3s;
+
 }
 
-.form button .icon {
+.form .button .ico {
     width: 20px;
     height: 20px;
     margin: 0 10px;
     fill: #000;
 }
 
-.form button:hover .icon {
+.form .button:hover .ico {
     fill: #ccc;
 }
-
-/* Responsive Styles */
 
 @media only screen and (max-width: 768px) {
     .form {

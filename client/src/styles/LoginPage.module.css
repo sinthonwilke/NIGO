@@ -97,6 +97,7 @@
 }
 
 .container button {
+    color: black;
     display: block;
     background-color: white;
     font-size: 1rem;

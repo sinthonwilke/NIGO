@@ -20,3 +20,6 @@ export const favUrl = api + 'fav/';
 export const collectionUrl = api + 'collection/';
 export const collectionGamesUrl = api + 'collection/game/';
 
+// Feedback
+export const feedbackUrl = api + 'feedback/';
+
