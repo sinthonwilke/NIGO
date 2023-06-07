@@ -12,8 +12,8 @@ const {
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.get('/logout', validateTokenHandler, logoutUser);
-router.get('/', validateTokenHandler, currentUser);
-router.put('/update', validateTokenHandler, uploadUserImg, updateUser)
+router.get('/logout', validateTokenHandler(), logoutUser);
+router.get('/', validateTokenHandler(), currentUser);
+router.put('/update', validateTokenHandler(), uploadUserImg, updateUser)
 
 module.exports = router;

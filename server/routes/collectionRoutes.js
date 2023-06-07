@@ -11,13 +11,13 @@ const {
     removeGameFromCollection
 } = require('../controllers/collectionControllers');
 
-router.get('/', validateTokenHandler, getCollection);
-router.put('/:reqId', validateTokenHandler, updateCollection);
-router.post('/', validateTokenHandler, createCollection);
-router.delete('/:reqId', validateTokenHandler, deleteCollection);
+router.get('/', validateTokenHandler(), getCollection);
+router.put('/:reqId', validateTokenHandler(), updateCollection);
+router.post('/', validateTokenHandler(), createCollection);
+router.delete('/:reqId', validateTokenHandler(), deleteCollection);
 
-router.get('/game/:reqId', validateTokenHandler, getCollectionGame);
-router.post('/game', validateTokenHandler, addGameToCollection);
-router.delete('/game/:reqCol&:reqGam', validateTokenHandler, removeGameFromCollection);
+router.get('/game/:reqId', validateTokenHandler(), getCollectionGame);
+router.post('/game', validateTokenHandler(), addGameToCollection);
+router.delete('/game/:reqCol&:reqGam', validateTokenHandler(), removeGameFromCollection);
 
 module.exports = router;

@@ -53,6 +53,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
+    console.log('logoutUser');
     let authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer')) {
         let token = authHeader.split(' ')[1];
