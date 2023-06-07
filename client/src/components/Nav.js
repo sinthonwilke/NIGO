@@ -8,10 +8,10 @@ import { RiAccountCircleFill, RiGamepadFill } from 'react-icons/ri';
 import { IoMdListBox } from 'react-icons/io';
 import { AiFillHeart } from 'react-icons/ai';
 import { CgLogOut } from 'react-icons/cg';
-import { VscGitPullRequestGoToChanges } from 'react-icons/vsc';
 import axios from 'axios';
 import { userUrl, url } from '../services/apiList';
 import authConfig from '../services/authConfig';
+import { VscFeedback } from 'react-icons/vsc';
 
 
 function Nav() {
@@ -126,8 +126,8 @@ function Nav() {
                         </li>
                         <br />
                         <li>
-                            <VscGitPullRequestGoToChanges />
-                            <Link to="/request">Request</Link>
+                            <VscFeedback />
+                            <Link to="/feedback">Feedback</Link>
                         </li>
                         <br />
                         <li>

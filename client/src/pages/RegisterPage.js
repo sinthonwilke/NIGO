@@ -23,7 +23,8 @@ const LoginPage = () => {
         setTimeout(() => {
             setShowMessageEffect(true);
         }
-            , 1);
+            , 3);
+        setShowMessageEffect(false);
     };
 
     const handleUsernameChange = (event) => {

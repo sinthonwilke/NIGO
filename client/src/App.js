@@ -10,7 +10,7 @@ import logout from './services/logout';
 import './App.css';
 import Layout from './layout/layout';
 import ProfilePage from './pages/ProfilePage';
-import Request from './pages/RequestPage';
+import FeedbackPage from './pages/FeedbackPage';
 
 function App() {
     const isAuth = isAuthenticated();
@@ -24,7 +24,7 @@ function App() {
                         <Route path="/game" element={<GamePage />} />
                         <Route path="/wishlist" element={<WishListPage />} />
                         <Route path="/favorite" element={<Favorite />} />
-                        <Route path="/request" element={<Request />} />
+                        <Route path="/feedback" element={<FeedbackPage />} />
                         <Route path="/logout" Component={logout} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
