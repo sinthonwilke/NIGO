@@ -12,6 +12,9 @@ import './App.css';
 import Layout from './layout/layout';
 import ProfilePage from './pages/ProfilePage';
 import FeedbackPage from './pages/FeedbackPage';
+import Admin from './pages/AdminPage';
+import AdminGamePage from './pages/AdminGamePage';
+import AdminFeedbackPage from './pages/AdminFeedbackPage';
 
 function App() {
     const isAuth = isAuthenticated();
@@ -30,6 +33,15 @@ function App() {
                         <Route path="/feedback" element={<FeedbackPage />} />
                         <Route path="/logout" Component={logout} />
                         <Route path="*" element={<Navigate to="/" />} />
+
+                        {isAdmin ? (
+                            <>
+                                <Route path="/admin/" element={<Admin />} />
+                                <Route path="/admin/game" element={<AdminGamePage />} />
+                                <Route path="/admin/feedback" element={<AdminFeedbackPage />} />
+                            </>
+                        ) : null}
+
                     </Routes>
                 </Layout>
             ) : (

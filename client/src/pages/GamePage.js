@@ -27,12 +27,16 @@ function GamePage() {
         const fetchData = async () => {
             try {
 
-                let getThisUrl = gameListUrl;
+                let getThisUrl = '';
 
                 if (searchValue) {
                     getThisUrl = searchGameUrl + searchValue;
                 }
+                else if (searchValue == '') {
+                    getThisUrl = gameListUrl;
+                }
 
+                console.log(getThisUrl);
                 const gameListResponse = await axios.get(getThisUrl);
                 const updatedGameList = gameListResponse.data.map((gameList, index) => ({
                     ...gameList,
@@ -54,9 +58,11 @@ function GamePage() {
                 setCollectionList(updatedCollectionList);
 
                 setIsLoading(false);
-                if (searchValue && updatedGameList.length > 0) {
+
+                if (updatedGameList.length > 0) {
                     setMessage(`Search result for "${searchValue}"`);
                     setShowMessageEffect(true);
+
                 } else {
                     setMessage(`No search result for "${searchValue}"`);
                     setShowMessageEffect(true);
@@ -96,7 +102,6 @@ function GamePage() {
             </>
         )
     } else {
-
         return (
             <>
                 <h1 className={gStyles.head}>Games</h1>

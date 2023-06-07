@@ -12,12 +12,17 @@ import axios from 'axios';
 import { userUrl, url } from '../services/apiList';
 import authConfig from '../services/authConfig';
 import { VscFeedback } from 'react-icons/vsc';
+import isRoleAdmin from '../services/isRoleAdmin';
+import { GrUserAdmin } from 'react-icons/gr';
+import { FaUserShield } from 'react-icons/fa';
 
 
 function Nav() {
+
+    const isAdmin = isRoleAdmin();
+    const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
-    const location = useLocation();
     const [userName, setUserName] = useState('');
     const [imageSrc, setImageSrc] = useState('');
 
@@ -129,6 +134,17 @@ function Nav() {
                             <VscFeedback />
                             <Link to="/feedback">Feedback</Link>
                         </li>
+
+                        {isAdmin ? (
+                            <>
+                                <br />
+                                <li>
+                                    <FaUserShield />
+                                    <Link to="/admin">Admin</Link>
+                                </li>
+                            </>
+                        ) : (null)}
+
                         <br />
                         <li>
                             <CgLogOut />
