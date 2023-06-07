@@ -29,6 +29,12 @@
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+.filterContainer div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .btn {
     background-color: #4caf50;
     color: white;
@@ -45,4 +51,13 @@
 .btn:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+    .filterContainer {
+        flex-direction: column;
+        height: auto;
+        gap: 16px;
+        justify-content: left;
+    }
 }

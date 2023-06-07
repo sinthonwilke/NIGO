@@ -137,7 +137,7 @@ function GamePage() {
                 <div>
                     <form onSubmit={handleSubmit} className={styles.filterContainer}>
                         <div>
-                            <p>Year</p>
+                            <p>Year:</p>
                             <select id="year-select">
                                 <option value="">Select a year</option>
                                 <option value="2023">2023</option>
@@ -147,7 +147,7 @@ function GamePage() {
                         </div>
 
                         <div className={styles.radioContainer}>
-                            <p>Platform</p>
+                            <p>Platform:</p>
                             <select id="platform-select">
                                 <option value="">Select a platform</option>
                                 <option value="PC">PC</option>
@@ -156,7 +156,7 @@ function GamePage() {
                         </div>
 
                         <div>
-                            <p>Genres</p>
+                            <p>Genres:</p>
                             <select id="genre-select" multiple>
                                 <option value="RPG">RPG</option>
                                 <option value="Open world">Open world</option>
