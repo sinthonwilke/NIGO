@@ -146,6 +146,13 @@ function GamePage() {
         setGenres(value);
     };
 
+    const handleClearFilter = () => {
+        setYear('');
+        setPlatform('');
+        setGenres([]);
+        setSelectedGenres([]);
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('Year:', year);
@@ -242,7 +249,11 @@ function GamePage() {
                         </div>
 
                         <div className={styles.filter4}>
-                            <button type="submit" className={styles.btn}>Filter</button>
+                            <button type="button" onClick={handleClearFilter} className={styles.btn1}>Clear</button>
+                        </div>
+
+                        <div className={styles.filter5}>
+                            <button type="submit" className={styles.btn2}>Filter</button>
                         </div>
                     </form>
                 </div>
