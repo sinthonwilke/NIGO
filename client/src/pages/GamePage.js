@@ -258,11 +258,19 @@ function GamePage() {
                 </div>
 
                 <div className={styles.gameContainer}>
-                    {gameList.map(game => (
-                        <div className={styles.item} key={game._id}>
-                            <Games game={game} favList={favList} onSignal={handleChildSignal} />
-                        </div>
-                    ))}
+                    {gameList
+                        .filter(game => {
+                            if (year && new Date(game.releaseDate).getFullYear().toString() !== year) return false;
+                            if (platform && game.platform !== platform) return false;
+                            if (genres.length > 0 && !game.tags.some(tag => genres.includes(tag))) return false;
+                            return true;
+                        })
+                        .map(game => (
+                            <div className={styles.item} key={game._id}>
+                                <Games game={game} favList={favList} onSignal={handleChildSignal} />
+                            </div>
+                        ))
+                    }
                 </div>
                 {isPopCollectionVisible && (
                     <PopCollection onClose={handleClosePopCollection} collectionList={collectionList} gameId={gameId} />
