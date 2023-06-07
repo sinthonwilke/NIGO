@@ -102,7 +102,7 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false, o
                         )}
                         <button className={styles.likeBtn} onClick={handleLikeClick}>
                             {like ? (
-                                <AiFillHeart style={{ fontSize: '26px' }} />
+                                <AiFillHeart style={{ fontSize: '26px', color: 'rgb(245,40,66)' }} />
                             ) : (
                                 <AiOutlineHeart style={{ fontSize: '26px' }} />
                             )}
