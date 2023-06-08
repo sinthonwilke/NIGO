@@ -41,11 +41,8 @@ function HomePage() {
                 setCollectionList(updatedCollectionList);
 
                 setIsLoading(false);
-                console.log(updatedGameList)
-
             } catch (error) {
                 console.error('Error fetching data:', error);
-
             }
         };
         fetchData();
