@@ -4,6 +4,11 @@ const fs = require('fs');
 
 
 const getGames = asyncHandler(async (req, res) => {
+    const games = await gameSchema.find().sort({ releaseDate: -1 });
+    res.status(200).json(games);
+});
+
+const getRecenlyGames = asyncHandler(async (req, res) => {
     const games = await gameSchema.find().sort({ createdAt: -1 });
     res.status(200).json(games);
 });
@@ -78,6 +83,7 @@ function deleteImg(url) {
 
 module.exports = {
     getGames,
+    getRecenlyGames,
     searchGames,
     getGame,
     createGame,

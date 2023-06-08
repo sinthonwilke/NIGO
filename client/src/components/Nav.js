@@ -55,7 +55,11 @@ function Nav() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        window.location.href = `/game?search=${searchValue}`;
+        if (searchValue[0] === '@') {
+            window.location.href = `/user?search=${searchValue}`;
+        } else {
+            window.location.href = `/game?search=${searchValue}`;
+        }
     };
 
     useEffect(() => {

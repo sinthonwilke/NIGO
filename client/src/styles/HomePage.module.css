@@ -1,0 +1,10 @@
+.gameContainer {
+    box-sizing: border-box;
+    display: flex;
+    padding: 16px;
+    margin: 0 auto;
+    width: 100%;
+    flex-direction: row;
+    gap: 32px;
+    overflow: auto;
+}

@@ -92,6 +92,12 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 });
 
+const findUser = asyncHandler(async (req, res) => {
+    const { username } = req.body;
+    const foundUser = await user.findOne({ username }).select({ bio: 1, profilePicture: 1, username: 1 });
+    res.status(200).json(foundUser);
+});
+
 function deleteImg(url) {
     if (url === '') return;
     fs.unlink(url, (err) => {
@@ -107,5 +113,6 @@ module.exports = {
     loginUser,
     logoutUser,
     currentUser,
-    updateUser
+    updateUser,
+    findUser,
 };

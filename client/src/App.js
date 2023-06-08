@@ -15,6 +15,7 @@ import FeedbackPage from './pages/FeedbackPage';
 import Admin from './pages/AdminPage';
 import AdminGamePage from './pages/AdminGamePage';
 import AdminFeedbackPage from './pages/AdminFeedbackPage';
+import OtherProfilePage from './pages/OtherProfilePage';
 
 function App() {
     const isAuth = isAuthenticated();
@@ -26,6 +27,7 @@ function App() {
                 <Layout>
                     <Routes>
                         <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/user" element={<OtherProfilePage />} />
                         <Route path="/" element={<HomePage />} />
                         <Route path="/game" element={<GamePage />} />
                         <Route path="/wishlist" element={<WishListPage />} />

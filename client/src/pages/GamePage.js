@@ -183,9 +183,9 @@ function GamePage() {
                                         onChange={handleYearChange}
                                         style={{ border: '1px solid rgba(255,255,255, 0.25)' }}
                                         sx={{
-                                            color: 'white', // text color
+                                            color: 'white',
                                             '& .MuiSelect-icon': {
-                                                color: 'white' // icon color
+                                                color: 'white'
                                             }
                                         }}
                                     >

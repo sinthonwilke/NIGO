@@ -7,7 +7,8 @@ const {
     loginUser,
     logoutUser,
     currentUser,
-    updateUser
+    updateUser,
+    findUser,
 } = require('../controllers/userControllers');
 
 router.post('/register', registerUser);
@@ -15,5 +16,6 @@ router.post('/login', loginUser);
 router.get('/logout', validateTokenHandler(), logoutUser);
 router.get('/', validateTokenHandler(), currentUser);
 router.put('/update', validateTokenHandler(), uploadUserImg, updateUser)
+router.post('/find', findUser);
 
 module.exports = router;
