@@ -100,7 +100,7 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false, o
                         {!fromColPage ? (
                             <button className={styles.A2Cbtn} onClick={handleAddCol}>Add To Collection</button>
                         ) : (
-                            <button className={styles.A2Cbtn} onClick={handleRemoveCol}>Remove From Collection</button>
+                            <button className={styles.A2Cbtn} onClick={handleRemoveCol}>Remove</button>
 
                         )}
                         <button className={styles.likeBtn} onClick={handleLikeClick}>

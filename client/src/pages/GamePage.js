@@ -193,6 +193,9 @@ function GamePage() {
                                         <MenuItem value={"2022"}>2022</MenuItem>
                                         <MenuItem value={"2021"}>2021</MenuItem>
                                         <MenuItem value={"2020"}>2020</MenuItem>
+                                        <MenuItem value={"2019"}>2019</MenuItem>
+                                        <MenuItem value={"2018"}>2018</MenuItem>
+                                        <MenuItem value={"2017"}>2017</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>
@@ -215,6 +218,11 @@ function GamePage() {
                                     >
                                         <MenuItem value={"Steam"}>Steam</MenuItem>
                                         <MenuItem value={"Xbox"}>Xbox</MenuItem>
+                                        <MenuItem value={"Rockstar"}>Rockstar</MenuItem>
+                                        <MenuItem value={"EA"}>EA</MenuItem>
+                                        <MenuItem value={"Blizzard"}>Blizzard</MenuItem>
+                                        <MenuItem value={"Nintendo"}>Nintendo</MenuItem>
+                                        <MenuItem value={"Epic"}>Epic</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>
@@ -262,7 +270,7 @@ function GamePage() {
                         .filter(game => {
                             if (year && new Date(game.releaseDate).getFullYear().toString() !== year) return false;
                             if (platform && game.platform !== platform) return false;
-                            if (genres.length > 0 && !game.tags.some(tag => genres.includes(tag))) return false;
+                            if (genres.length > 0 && !genres.every(genre => game.tags.includes(genre))) return false;
                             return true;
                         })
                         .map(game => (

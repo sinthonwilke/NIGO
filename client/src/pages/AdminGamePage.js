@@ -58,7 +58,7 @@ function AdminGamePage() {
                                         <td>{game.title}</td>
                                         <td>{game._id}</td>
                                         <td>{game.releaseDate}</td>
-                                        <td>{game.description}</td>
+                                        <td>{game.description.length > 50 ? game.description.slice(0, 50) + ' >>>...' : game.description}</td>
                                         <td>{game.platform}</td>
                                         <td>{game.link}</td>
                                         <td>{game.tags.join(', ')}</td>
