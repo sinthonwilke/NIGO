@@ -221,7 +221,7 @@ function GamePage() {
                         </div>
 
                         <div className={styles.filter3}>
-                            <FormControl sx={{ m: 1, width: 120 }}>
+                            <FormControl sx={{ minWidth: 120 }} fullWidth>
                                 <InputLabel sx={{ color: 'white' }}>Tags</InputLabel>
                                 <Select
                                     multiple
@@ -251,9 +251,9 @@ function GamePage() {
                             <button type="button" onClick={handleClearFilter} className={styles.btn1}>Clear</button>
                         </div>
 
-                        <div className={styles.filter5}>
+                        {/* <div className={styles.filter5}>
                             <button type="submit" className={styles.btn2}>Filter</button>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
 

@@ -90,8 +90,11 @@ function Games({ game, favList = [], fromFavPage = false, fromColPage = false, o
             ) : (
                 <div className={styles.itemCard}>
                     <button className={styles.btnContent} onClick={handleButtonClick}>
-                        <div>{imageSrc && <img src={imageSrc} />}</div>
+                        <div className={styles.imageContainer}>
+                            {imageSrc && <img src={imageSrc} className={styles.centeredImage} />}
+                        </div>
                     </button>
+
                     <h3>{game.title}</h3>
                     <div className={styles.buttonContainer}>
                         {!fromColPage ? (
