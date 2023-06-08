@@ -23,8 +23,13 @@ const getAllFeedbacks = asyncHandler(async (req, res) => {
     res.status(200).send(feedbacks);
 });
 
+const deleteFeedback = asyncHandler(async (req, res) => {
+    await feedbackSchema.findByIdAndDelete(req.params.reqId);
+    res.status(200).send('deleted');
+});
 
 module.exports = {
     createFeedback,
-    getAllFeedbacks
+    getAllFeedbacks,
+    deleteFeedback
 };

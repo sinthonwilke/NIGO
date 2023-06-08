@@ -12,18 +12,32 @@ function AdminFeedbackPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
             const feedbackListResponse = await axios.get(feedbackUrl, authConfig);
             const updatedFeedbackList = feedbackListResponse.data.map((feedback, index) => ({
                 ...feedback,
                 id: index + 1
             }));
             setFeedbackList(updatedFeedbackList);
-
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching feedback list:', error);
             setIsLoading(false);
         }
-        fetchData();
-    }, []);
+    }
+
+    const handleDelete = async (feedbackId) => {
+        try {
+            await axios.delete(feedbackUrl + feedbackId, authConfig);
+            fetchData();
+        } catch (error) {
+            console.error('Error deleting feedback:', error);
+        }
+    };
 
     if (isLoading) {
         return (
@@ -54,7 +68,7 @@ function AdminFeedbackPage() {
                                     <td>{feedback.details}</td>
                                     <td>
                                         <button className={styles.btn}>Receive</button>
-                                        <button className={styles.btn}>Delete</button>
+                                        <button className={styles.btn} onClick={() => handleDelete(feedback._id)}>Delete</button>
                                     </td>
                                 </tr>
                             ))}

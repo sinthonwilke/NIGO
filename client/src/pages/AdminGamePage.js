@@ -1,29 +1,43 @@
-import gStyles from '../styles/global.module.css';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { gameListUrl } from '../services/apiList';
-import { useState } from 'react';
-import styles from '../styles/AdminPageTable.module.css';
 import Loading from '../components/Loading';
-
+import styles from '../styles/AdminPageTable.module.css';
+import gStyles from '../styles/global.module.css';
+import { gameListUrl } from '../services/apiList';
+import authConfig from '../services/authConfig';
 
 function AdminGamePage() {
+
     const [gameList, setGameList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
             const gameListResponse = await axios.get(gameListUrl);
-            const updatedGameList = gameListResponse.data.map((gameList, index) => ({
-                ...gameList,
+            const updatedGameList = gameListResponse.data.map((game, index) => ({
+                ...game,
                 id: index + 1
             }));
             setGameList(updatedGameList);
-
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching game list:', error);
             setIsLoading(false);
         }
-        fetchData();
-    }, []);
+    };
+
+    const handleDelete = async (gameId) => {
+        try {
+            await axios.delete(gameListUrl + gameId, authConfig);
+            fetchData();
+        } catch (error) {
+            console.error('Error deleting game:', error);
+        }
+    };
 
     if (isLoading) {
         return (
@@ -31,7 +45,7 @@ function AdminGamePage() {
                 <h1 className={gStyles.head}>Admin: Games</h1>
                 <Loading />
             </>
-        )
+        );
     } else {
         return (
             <>
@@ -66,7 +80,7 @@ function AdminGamePage() {
                                         <td>
                                             <button className={styles.btn}>Edit</button>
                                             <button className={styles.btn}>Image</button>
-                                            <button className={styles.btn}>Delete</button>
+                                            <button className={styles.btn} onClick={() => handleDelete(game._id)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -75,8 +89,8 @@ function AdminGamePage() {
                     </div>
                 </div>
             </>
-        )
-    };
+        );
+    }
 }
 
 export default AdminGamePage;
